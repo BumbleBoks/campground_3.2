@@ -1,0 +1,10 @@
+# file to push changes to github and heroku
+# add local repository - checkout master branch, get the name of
+# branch to merge changes from
+# system ("git co master")
+# system ("git merge <branch_name")
+# run this file using "perl -w git_push_changes"
+
+#! /ur/bin/perl
+!system "git push" or die "Could not push to github!";
+!system "git push heroku" or die "Could not push to heroku!";
