@@ -1,0 +1,43 @@
+/* variables */
+$static_background: tan;
+$static_border: brown;
+$static_width: 200px;
+
+/* universal */
+
+body {
+	background: url('background.png') repeat fixed center/center;
+
+	#user_individual {
+		float: right;
+		width: $static_width;
+		background-color: $static_background;
+		border-left: 2px solid $static_border;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0
+		height: 100%
+	}
+	#user_community {
+		float: left;
+		width: $static_width;
+		background-color: $static_background;
+		border-right: 2px solid $static_border;
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0
+		height: 100%
+	}
+	#user_dynamic {
+		position: absolute;
+		left: $static_width;
+		right: $static_width;
+		margin: 10px;		
+	}
+	
+	#title_board {
+		margin: 20px;
+	}
+}
