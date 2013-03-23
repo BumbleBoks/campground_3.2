@@ -1,43 +1,143 @@
 /* variables */
-$static_background: tan;
-$static_border: brown;
+$static_background: rgba(210, 180, 140, 0.5);
+$static_border: 2px solid brown;
 $static_width: 200px;
+$static_opacity: 0.5;
+
+/* mixins */
+@mixin static_styling {
+	width: $static_width;
+	background-color: $static_background;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+@mixin header_button_styling {
+	border-radius: 10px;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin-top: -20px;	
+}
 
 /* universal */
 
 body {
-	background: url('background.png') repeat fixed center/center;
+	background: url('background.png') repeat fixed center center;
+}
 
-	#user_individual {
+/* typography */
+h2 {
+	color: darkgreen;
+	text-align: center;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+/* header */
+header {
+	background: darkseagreen;
+	margin-bottom: 10px;
+	font-size: 25px;
+	color: sienna;
+	padding-top: 20px;
+	font-weight: bold;
+	border-bottom: $static_border;
+	height: 30px;
+	
+	#right_buttons {		
 		float: right;
-		width: $static_width;
-		background-color: $static_background;
-		border-left: 2px solid $static_border;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0
-		height: 100%
-	}
-	#user_community {
-		float: left;
-		width: $static_width;
-		background-color: $static_background;
-		border-right: 2px solid $static_border;
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0
-		height: 100%
-	}
-	#user_dynamic {
-		position: absolute;
-		left: $static_width;
-		right: $static_width;
-		margin: 10px;		
+		background-color: rgb(226, 162, 136);
+		color: sienna;		
+		@include header_button_styling;
 	}
 	
-	#title_board {
-		margin: 20px;
+	#left_buttons {
+		float: left;	
+		color: rgb(226, 162, 136);
+		background-color: sienna;		
+		@include header_button_styling;
 	}
+	
+	
+	h1 {
+		text-align: center;
+		margin-top: -22px;
+	}
+	
+}
+
+
+/* footer */
+
+footer {
+	margin-top: 25px;
+	padding-top: 5px;
+	border-top: 2px solid darkseagreen;
+	color: sienna;
+	font-size: 20px;
+	
+	a {
+		color: sienna;
+		text-decoration:none;
+		&:hover {
+			color: brown;
+		}
+	}
+	
+	#right_links {
+		float: right;
+	}
+	
+	#left_links {
+		float: left;
+	}
+	
+}
+
+
+/* custom classes */
+
+
+#user_individual {
+	float: right;
+	@include static_styling;
+	right: 0;
+	border-left: $static_border;
+}
+#user_community {
+	float: left;
+	@include static_styling;
+	left: 0;
+	border-right: $static_border;	
+}
+#user_dynamic {
+	position: absolute;
+	left: $static_width;
+	right: $static_width;
+	margin: 10px;	
+	
+	#user_display {
+		margin: 15px;
+		border: 1px solid green;
+		background-color: ivory;
+	}	
+}
+
+.title_board {
+	height: 100px;
+	background: url("board.png") no-repeat scroll top;
+	margin: 50px 20px 50px 20px;
+	.title_text {
+		color: darkkhaki;
+		padding: 34px 20px;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+		font-size: 25px;
+		text-align: center;	
+	}
+}
+
+.inactive {
+	opacity: 0.5;
 }
