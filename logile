@@ -1,0 +1,67 @@
+LOG:  database system was shut down at 2013-03-26 12:22:16 CDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
+ERROR:  column users.attribute does not exist at character 38
+STATEMENT:  SELECT  1 AS one FROM "users"  WHERE "users"."attribute" IS NULL LIMIT 1
