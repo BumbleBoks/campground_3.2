@@ -8,10 +8,11 @@ $static_opacity: 0.5;
 @mixin static_styling {
 	width: $static_width;
 	background-color: $static_background;
-	height: 100%;
 	position: absolute;
 	top: 0;
 	bottom: 0;
+	overflow: visible;
+	border-bottom: $static_border;
 }
 
 @mixin header_button_styling {
@@ -98,8 +99,6 @@ footer {
 
 
 /* custom classes */
-
-
 #user_individual {
 	float: right;
 	@include static_styling;

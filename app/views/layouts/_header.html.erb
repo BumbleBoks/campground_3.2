@@ -1,9 +1,11 @@
 <header>
-	<button id="left_buttons">
-	Sign up			
-	</button> 
+	<% if params[:controller] != "users" || params[:action] != "new" %>
+		<button id="left_buttons">
+			Join			
+		</button>
+	<% end %> 
 	<button id="right_buttons">
-	Sign in
+	Log in
 	</button>
 	<h1><%= link_to image_tag("logo.png", alt: "Logo - Home"), root_path %></h1>
 </header>	

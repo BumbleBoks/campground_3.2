@@ -1,0 +1,37 @@
+<% provide(:title, "Join Campground") %>
+<h2>Join</h2>
+
+<div class="project_form">
+	<%= form_for @user do |f| -%>
+
+		<%= render 'shared/error_messages', object: f.object%>
+
+			<%= f.label :login_id, "Login ID" %>
+			<%= f.text_field :login_id  %>			
+
+		<div>
+			<%= f.label :name, "Name" %>
+			<%= f.text_field :name  %>		
+		</div>
+
+		<div>
+			<%= f.label :email, "Email" %>
+			<%= f.text_field :email  %>
+		</div>
+
+		<div>
+			<%= f.label :password, "Password" %>
+			<%= f.password_field :password  %>
+		</div>
+
+		<div>
+			<%= f.label :password_confirmation, "Confirm password" %>
+			<%= f.password_field :password_confirmation  %>
+		</div>
+
+		<div>
+			<%= f.submit "Create my account" %>			
+		</div>
+
+	<% end -%>	
+</div>

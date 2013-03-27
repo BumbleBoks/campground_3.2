@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX }
   VALID_PASSWORD_REGEX = /.*[a-zA-z]+.*\d+.*|.*\d+.*[a-zA-z]+.*/
-  validates :password, presence: true,
+  validates :password,
             length: { minimum: 6 },
             format: { with: VALID_PASSWORD_REGEX }
   validates :password_confirmation, presence: true
