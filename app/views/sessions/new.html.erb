@@ -1,0 +1,22 @@
+<% provide(:title, "Campground Log In") %>
+
+<h2>Enter campground </h2>
+
+<div class="project_form">
+	<%= form_tag sessions_path do %>
+		<div>
+			<%= label_tag :login_id, "Login ID" %>
+			<%= text_field_tag :login_id, params[:login_id]  %>						
+		</div>
+
+		<div>
+			<%= label_tag :password, "Password" %>
+			<%= password_field_tag :password  %>
+		</div>
+
+		<div>
+			<%= submit_tag "Log in" %>			
+		</div>
+	  
+	<% end -%>
+</div>

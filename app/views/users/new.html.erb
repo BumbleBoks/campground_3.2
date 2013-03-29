@@ -1,13 +1,15 @@
 <% provide(:title, "Join Campground") %>
-<h2>Join</h2>
+<h2>Join campground</h2>
 
 <div class="project_form">
 	<%= form_for @user do |f| -%>
 
 		<%= render 'shared/error_messages', object: f.object%>
 
+		<div>
 			<%= f.label :login_id, "Login ID" %>
-			<%= f.text_field :login_id  %>			
+			<%= f.text_field :login_id  %>						
+		</div>
 
 		<div>
 			<%= f.label :name, "Name" %>

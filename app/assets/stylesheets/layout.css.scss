@@ -18,9 +18,15 @@ $static_opacity: 0.5;
 @mixin header_button_styling {
 	border-radius: 10px;
 	width: 100px;
-	height: 50px;
+	height: 20px;
 	font-size: 20px;
-	margin-top: -20px;	
+	margin-top: -20px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	text-decoration: none;
+	text-align: center;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: normal;	
 }
 
 /* universal */
@@ -47,12 +53,14 @@ header {
 	border-bottom: $static_border;
 	height: 30px;
 	
+	
 	#right_buttons {		
 		float: right;
 		background-color: rgb(226, 162, 136);
 		color: sienna;		
 		@include header_button_styling;
 	}
+	
 	
 	#left_buttons {
 		float: left;	

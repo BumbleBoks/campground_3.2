@@ -1,12 +1,15 @@
 Campground::Application.routes.draw do
+  resources :users
+  
+  resources :sessions, only: [:new, :create, :destroy]
   
   root to: 'static_pages#home';
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   
   get 'join', to: 'users#new', as: 'join'
-  
-  resources :users
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

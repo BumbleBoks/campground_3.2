@@ -1,11 +1,14 @@
 <header>
-	<% if params[:controller] != "users" || params[:action] != "new" %>
-		<button id="left_buttons">
-			Join			
-		</button>
-	<% end %> 
-	<button id="right_buttons">
-	Log in
-	</button>
+	<% if logged_in? %>
+		<% if params[:controller] != "users" || params[:action] != "new" %>
+			<%= link_to "Join", join_path, id: "left_buttons" %>			
+		<% end %> 
+		<% if params[:controller] != "sessions" || params[:action] !="new" %>
+			<%= link_to "Log in", login_path, id: "right_buttons" %>			
+		<% end %>
+	<% else %>
+		<%= link_to "Profile", current_user , id: "left_buttons" %>
+		<%= link_to "Log out", logout_path, method: :delete, id: "right_buttons" %>
+	<% end %>
 	<h1><%= link_to image_tag("logo.png", alt: "Logo - Home"), root_path %></h1>
 </header>	

@@ -4,19 +4,21 @@ describe "UserPages" do
   
   subject { page }
   
-  describe "signup page" do
+  describe "join page" do
     before { visit join_path }
     
     it { has_page_title('Join Campground') }
-    it { should have_selector('h2', text: 'Join') }
+    it { should have_selector('h2', text: 'Join campground') }
     it { should_not have_selector('button', text: 'Join') }
-    it { should have_selector('button', text: 'Log in') }
-    it { should_not have_selector('button', text: 'Profile') }
-    it { should_not have_selector('button', text: 'Logout') }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Log out') }
+    it { should_not have_link('Join', href: join_path) }
+    it { should have_link('Log in', href: login_path) }
   end
   
   describe "joining process" do
-    before { visit join_path }
+    before { visit join_path }    
+    
     let (:submit) { "Create my account" }
     
     describe "with not enough information" do
