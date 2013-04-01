@@ -7,7 +7,7 @@ describe "UserPages" do
   describe "join page" do
     before { visit join_path }
     
-    it { has_page_title('Join Campground') }
+    it { should have_page_title('Join Campground') }
     it { should have_selector('h2', text: 'Join campground') }
     it { should_not have_selector('button', text: 'Join') }
     it { should_not have_link('Profile') }
@@ -19,7 +19,7 @@ describe "UserPages" do
   describe "joining process" do
     before { visit join_path }    
     
-    let (:submit) { "Create my account" }
+    let (:submit) { "Create account" }
     
     describe "with not enough information" do
       it "should not create a user" do 
@@ -29,7 +29,7 @@ describe "UserPages" do
       describe "after submitting empty form" do
         before { click_button submit }
         
-        it { has_page_title('Join Campground') }
+        it { should have_page_title('Join Campground') }
         it { should have_content('error') }
         it { should have_content('Login can\'t be blank') }
         it { should have_content('Login is invalid') }
@@ -55,6 +55,17 @@ describe "UserPages" do
       it "should create a new user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
+      
+      describe "and login to home page" do
+        before { click_button submit }
+        let (:user) { User.find_by_login_id("examplefoo") }
+        
+        it { should have_link("Log out", logout_path) }
+        it { should have_link("Profile", user_path(user)) }
+        it { should_not have_link("Join") }
+        it { should_not have_link("Log in") }
+      end
+      
     end
     
     

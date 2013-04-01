@@ -8,7 +8,7 @@ describe "SessionPages" do
     
     before { visit login_path }
     
-    it { has_page_title("Campground Log In") }
+    it { should have_page_title("Campground Log In") }
     it { should have_selector('h2', text: "Enter campground") }
     
     it { should_not have_link('Log in') }
@@ -24,7 +24,7 @@ describe "SessionPages" do
       let (:user) { FactoryGirl.create(:user) }
       before { log_in user }   
       
-      it { has_page_title("#{user.name}'s Campground") }
+      it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_link('Log out', href: logout_path) }
       it { should have_link('Profile', href: user_path(user)) }
       it { should_not have_link('Join', href: join_path) }
@@ -33,7 +33,7 @@ describe "SessionPages" do
       describe "and then log out" do
         before { click_link 'Log out' }
         
-        it { has_page_title("Campground") }
+        it { should have_page_title("Campground") }
         it { should have_link('Log in', href: login_path) }
         it { should have_link('Join', href: join_path) }
         it { should_not have_link('Log out') }

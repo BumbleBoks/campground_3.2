@@ -27,7 +27,11 @@ $error-color: rgb(211, 147, 88);
 
 			&[type="submit"] {
 				margin-top: 10px;
-				margin-left: 20px;
+				margin-left: 150px;
+				font-size: 15px;
+				width: 150px;
+				height: 30px;
+				background-color: lighten(darkgreen, 60%);
 			}
 		}
 	}

@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326170436) do
+ActiveRecord::Schema.define(:version => 20130329041356) do
+
+  create_table "common_activities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "common_activities", ["name"], :name => "index_common_activities_on_name", :unique => true
+
+  create_table "common_states", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "common_states", ["name"], :name => "index_common_states_on_name", :unique => true
+
+  create_table "common_trails", :force => true do |t|
+    t.string   "name"
+    t.decimal  "length"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login_id"

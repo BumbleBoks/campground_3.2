@@ -1,8 +1,6 @@
 <div id="user_individual">	
-	<div class="title_board ">		
-	</div>
-	<div class="title_board">		
-	</div>
-	<div class="title_board">		
-	</div>
+	<% div_name = div_for_side_panes %>
+	<%= content_tag(:div, content_tag(:div, "Diary", class: "title_text"), class: div_name )%>
+	<%= content_tag(:div, content_tag(:div, "Favorites", class: "title_text"), class: div_name )%>
+	<%= content_tag(:div, content_tag(:div, "Trips", class: "title_text"), class: div_name )%>
 </div>
