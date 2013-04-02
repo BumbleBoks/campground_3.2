@@ -3,12 +3,11 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  login_id        :string(255)
-#  name            :string(255)
-#  email           :string(255)
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean
+#  login_id        :string(50)       not null
+#  name            :string(50)       not null
+#  email           :string(255)      not null
+#  password_digest :string(255)      not null
+#  admin           :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

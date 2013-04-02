@@ -3,7 +3,7 @@
 # Table name: common_activities
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,6 +15,8 @@ describe Common::Activity do
   subject { @activity }
   
   it { should respond_to(:name) }
+  it { should respond_to(:activity_associations) }
+  it { should respond_to(:trails) }
   it { should be_valid }
   
   describe "without name" do

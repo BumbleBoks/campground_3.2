@@ -11,4 +11,19 @@ FactoryGirl.define do
     end
   end
   
+  factory :state, class: Common::State do
+    sequence(:name) { |n| "Foo#{n} State" }
+  end
+  
+  factory :activity, class: Common::Activity do
+    sequence(:name) { |n| "Foo#{n} Activity" }
+  end
+
+  factory :trail, class: Common::Trail do
+    name "Foo Trail"
+    length 10
+    description "This is a great trail"
+    state
+  end
+  
 end    

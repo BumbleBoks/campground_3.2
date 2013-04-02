@@ -3,7 +3,7 @@
 # Table name: common_states
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,6 +15,7 @@ describe Common::State do
   subject { @state }
   
   it { should respond_to(:name) }
+  it { should respond_to(:trails) }
   it { should be_valid }
   
   describe "without name" do
@@ -29,6 +30,6 @@ describe Common::State do
     end
     
     it { should_not be_valid }
-  end
+  end  
   
 end
