@@ -10,7 +10,7 @@
 #
 
 class Common::ActivityAssociation < ActiveRecord::Base
-  attr_accessible :activity_id, :trail_id
+  attr_accessible :activity_id
   
   belongs_to :trail, class_name: "Common::Trail", foreign_key: "trail_id"
   belongs_to :activity, class_name: "Common::Activity", foreign_key: "activity_id"

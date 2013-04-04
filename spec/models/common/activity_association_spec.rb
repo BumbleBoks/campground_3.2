@@ -30,4 +30,12 @@ describe Common::ActivityAssociation do
     it { should_not be_valid }
   end
   
+  describe "accessible attributes" do
+    it "should not allow access to trail_id" do
+      expect do
+        Common::ActivityAssociation.new(trail_id: trail.id, activity_id: activity.id)
+      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
+  end
+  
 end

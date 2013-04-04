@@ -3,6 +3,8 @@ $static_background: rgba(210, 180, 140, 0.5);
 $static_border: 2px solid brown;
 $static_width: 200px;
 $static_opacity: 0.5;
+$h2_color: darkgreen;
+$h_font_family: "Trebuchet MS", Helvetica, sans-serif;
 
 /* mixins */
 @mixin static_styling {
@@ -37,9 +39,30 @@ body {
 
 /* typography */
 h2 {
-	color: darkgreen;
+	color: $h2_color;
 	text-align: center;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: $h_font_family;
+}
+
+h4 {
+	color: lighten($h2_color, 10%);
+	text-align: center;
+	font-family: $h_font_family;
+	font-size: 16px;
+	margin-top: -10px;
+}
+
+h5 {
+	color: lighten($h2_color, 20%);
+	text-align: center;
+	font-family: $h_font_family;
+	font-size: 14px;
+	margin-top: -10px;
+}
+
+a {
+	color: saddlebrown;
+	text-decoration: none;
 }
 
 /* header */

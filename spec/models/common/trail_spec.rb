@@ -25,6 +25,7 @@ describe Common::Trail do
   it { should respond_to(:state) }
   it { should respond_to(:activity_associations) }
   it { should respond_to(:activities) }
+  it { should respond_to(:updates) }
   it { should be_valid }
   
   describe "without name" do
@@ -58,4 +59,34 @@ describe Common::Trail do
     end
   end  
   
+  describe "activity associations" do
+    let!(:activity) { FactoryGirl.create(:activity) }
+    before { @trail.activity_associations.build(activity_id: activity.id) }
+    
+    it "should destroy activity_associations for the trail" do
+      activity_associations = @trail.activity_associations.dup
+      @trail.destroy
+      activity_associations.should_not be_empty
+      activity_associations.each do |association|
+        Common::ActivityAssociation.find_by_id(association.id).should be_nil
+      end
+    end
+  end
+  
+  describe "update associations" do
+    let!(:user) { FactoryGirl.create(:user) }
+    before do
+      @trail.save
+      FactoryGirl.create(:update, content: "Lorem ipsum", author: user, trail: @trail) 
+    end 
+    
+    it "should destroy update associations for the trail" do
+      updates = @trail.updates.dup
+      @trail.destroy
+      updates.should_not be_empty
+      updates.each do |update|
+        Community::Update.find_by_id(update.id).should be_nil
+      end
+    end
+  end
 end

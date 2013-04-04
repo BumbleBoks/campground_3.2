@@ -1,0 +1,13 @@
+<% provide(:title, "Campground - New Trail") %>
+<h2>Create a trail</h2>
+
+<div class='project_form'>
+	<%= form_for @trail do |f| -%>
+		<%= render 'fields', f: f %>
+
+		<div>
+			<%= f.submit "Add a new trail" %>			
+		</div>
+
+	<% end -%>
+</div>

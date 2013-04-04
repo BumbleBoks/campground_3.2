@@ -1,0 +1,32 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<div>
+	<%= f.label :name, "Name" %>
+	<%= f.text_field :name %>
+</div>	
+
+<div>
+	<%= f.label :length, "Length (miles)" %>
+	<%= f.text_field :length %>
+</div>	
+
+<div>
+	<%= f.label :state, "State" %>
+	<%= select_tag "common_trail[state_id]", 
+		options_from_collection_for_select(Common::State.all, 'id', 'name', @trail.state_id),
+	 	prompt: "State" %>
+</div>
+
+<div>
+	<%= f.label :acivities, "Activities" %>
+	<% Common::Activity.all.each do |activity| %>
+		<%= check_box_tag "common_trail[activity_ids][]", activity.id, 
+			@trail.activity_ids.include?(activity.id), id: dom_id(activity) %>
+		<%= label_tag dom_id(activity), activity.name, id: "nested_form" %>				
+	<% end %>	
+</div>
+
+<div>
+	<%= f.label :description, "Description" %>
+	<%= f.text_area :description, rows: 10 %>
+</div>	

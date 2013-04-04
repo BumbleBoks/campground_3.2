@@ -10,6 +10,10 @@ Campground::Application.routes.draw do
   get 'join', to: 'users#new', as: 'join'
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
+  
+  namespace :common do
+    resources :trails
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

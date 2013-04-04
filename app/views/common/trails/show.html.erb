@@ -1,0 +1,17 @@
+<% provide(:title, "Campground - #{@trail.name}") %>
+<h2><%= @trail.name %></h2>
+<h4>in <%= @trail.state.name %></h4>
+<% if @trail.activities.any? %>
+	<h5>for
+	<% @trail.activities.each do |activity| %>
+		<% if !(activity == @trail.activities.first) %>
+			<%= ", " %>
+		<% end %>
+		<%= activity.name %>
+	<% end %></h5>
+<% end %>
+<p> This trail is <%= @trail.length.to_f %> miles long. 
+	<%= @trail.description %></p>
+<% if logged_in? %>
+	<%= link_to "Add an update", "..." %>
+<% end %>

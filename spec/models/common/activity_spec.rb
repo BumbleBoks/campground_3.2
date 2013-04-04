@@ -46,4 +46,22 @@ describe Common::Activity do
     it { should be_valid }
   end
   
+  describe "activity associations" do
+    let!(:trail) { create_trail }
+    before do
+      @activity.save
+      trail.activity_associations.create!(activity_id: @activity.id) 
+    end
+    
+    it "should destroy activity_associations for the activity" do
+      activity_associations = @activity.activity_associations.dup
+      activity_associations.should_not be_empty      
+      @activity.destroy
+      # activity_associations.should_not be_empty
+      activity_associations.each do |activity_association|
+        Common::ActivityAssociation.find_by_id(activity_association.id).should be_nil
+      end
+    end
+  end
+  
 end

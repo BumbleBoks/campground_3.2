@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401013227) do
+ActiveRecord::Schema.define(:version => 20130403235605) do
 
   create_table "common_activities", :force => true do |t|
     t.string   "name",       :null => false
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(:version => 20130401013227) do
 
   add_index "common_trails", ["name"], :name => "index_common_trails_on_name"
   add_index "common_trails", ["state_id"], :name => "index_common_trails_on_state_id"
+
+  create_table "community_updates", :force => true do |t|
+    t.text     "content",    :null => false
+    t.integer  "author_id",  :null => false
+    t.integer  "trail_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "community_updates", ["author_id"], :name => "index_community_updates_on_author_id"
+  add_index "community_updates", ["trail_id"], :name => "index_community_updates_on_trail_id"
 
   create_table "users", :force => true do |t|
     t.string   "login_id",        :limit => 50,                    :null => false

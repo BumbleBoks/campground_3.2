@@ -6,4 +6,11 @@ module ApplicationHelper
       div_name = "title_board inactive"
     end
   end
+  
+  def authorize_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path
+      false
+    end
+  end
 end

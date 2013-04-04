@@ -24,9 +24,9 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-  it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:updates) }
   
   it { should be_valid }
   it { should_not be_admin }
@@ -212,6 +212,22 @@ describe User do
       
       it { should_not == user_with_invalid_password }
       specify { user_with_invalid_password.should be_false } 
+    end
+  end
+  
+  describe "update associations" do
+    let!(:trail) { create_trail }
+    before do
+      @user.save
+      FactoryGirl.create(:update, content: "Lorem ipsum", author: @user, trail: trail) 
+    end
+    it "should destroy update associations for the user" do
+      updates = @user.updates.dup
+      @user.destroy
+      updates.should_not be_empty
+      updates.each do |update|
+        Community::Update.find_by_id(update.id).should be_nil
+      end
     end
   end
   

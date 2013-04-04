@@ -12,17 +12,19 @@
 #
 
 class Common::Trail < ActiveRecord::Base
-  # accepts_nested_attributes_for :activity_associations
-  
-  attr_accessible :description, :length, :name, :state_id
+  attr_accessible :description, :length, :name, :state_id, :activity_ids
   
   belongs_to :state, 
-             class_name: "Common::State", 
-             foreign_key: "trail_id"
+             class_name: "Common::State"
              
   has_many :activity_associations, class_name: "Common::ActivityAssociation", 
            foreign_key: "trail_id", dependent: :destroy
   has_many :activities, class_name: "Common::Activity", through: :activity_associations
+  
+  has_many :updates, 
+           class_name: "Community::Update", 
+           foreign_key: "trail_id",
+           dependent: :destroy
 
   VALID_NAME_REGEX = /^[A-Za-z\d_]+( |\w)*$/
   validates :name, presence: true,

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:author] do
     sequence(:login_id) { |n| "foo#{n}" }    
     email { "#{login_id}@example.com" }
     name "The Foo"
@@ -24,6 +24,12 @@ FactoryGirl.define do
     length 10
     description "This is a great trail"
     state
+  end
+  
+  factory :update, class: Community::Update do
+    content "Lorem ipsum"
+    author
+    trail
   end
   
 end    

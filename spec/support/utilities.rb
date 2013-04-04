@@ -41,6 +41,11 @@ RSpec::Matchers.define :have_error_message do |message|
   end
 end
 
+RSpec::Matchers.define :have_field_with_name_and_value do |name, value|
+  match do |page|
+    find_field(name).value.should eq(value)
+  end
+end
 
 def log_in(user)
   visit login_path

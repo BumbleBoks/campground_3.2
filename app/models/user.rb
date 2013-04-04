@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   attr_accessible :login_id, :name, :email, :password, :password_confirmation
   has_secure_password
   
+  has_many :updates, 
+           class_name: "Community::Update", 
+           foreign_key: "author_id",
+           dependent: :destroy
+  
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
             uniqueness: { case_sensitive: false },
