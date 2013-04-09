@@ -13,5 +13,7 @@
 <p> This trail is <%= @trail.length.to_f %> miles long. 
 	<%= @trail.description %></p>
 <% if logged_in? %>
-	<%= link_to "Add an update", "..." %>
+	<div class='project_form'>
+		<%= render 'common/trails/update_form' %>		
+	</div>
 <% end %>

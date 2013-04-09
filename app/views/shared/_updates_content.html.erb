@@ -1,0 +1,15 @@
+<h4>Updates for <%= trail.name %></h4>
+<% if updates.any? %>
+	<% updates.each do |update| %>
+		<span class="update_content">
+			<%= wrap(update.content) %>
+		</span>
+		<span class="update_time">
+			Posted <%= time_ago_in_words(update.created_at) %> ago
+		</span>
+	<% end %>
+<% else %>
+	<span class="update_content">
+		No updates found
+	</span>
+<% end %>

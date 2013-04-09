@@ -3,6 +3,9 @@ class Common::TrailsController < ApplicationController
   
   def show
     @trail = Common::Trail.find_by_id(params[:id])
+    if logged_in?
+      @update = current_user.updates.build
+    end
   end
   
   def new

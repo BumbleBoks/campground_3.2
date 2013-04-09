@@ -130,6 +130,8 @@ describe "Trail pages" do
   describe "show a trail" do
     let(:trail) { FactoryGirl.create(:trail, name: "Old Trail", length: 8.0, description: "Short trail",
       state_id: Common::State.find_by_name("Idaho").id) }
+    let (:submit) { "Add update" }
+    
     before do
       trail.activity_associations.create(activity_id: Common::Activity.find_by_name("Cross country skiing").id)
       trail.activity_associations.create(activity_id: Common::Activity.find_by_name("Cycling").id)
@@ -144,7 +146,7 @@ describe "Trail pages" do
     it { should have_selector('h5', text: "for Cross country skiing , Cycling") }
     
     describe "without logging in" do
-      it { should_not have_link("Add an update") }
+      it { should_not have_button("Add update") }
     end
     
     describe "as a regular user" do
@@ -152,7 +154,28 @@ describe "Trail pages" do
         log_in user
         visit common_trail_path(trail)
       end
-      it { should have_link("Add an update") }
+      it { should have_button("Add update") }
+      
+      describe "adding an update" do
+        describe "with empty content" do
+          it "should not add an update" do
+            expect { click_button submit }.not_to change(Community::Update, :count)
+          end
+          
+          # describe "should show error" do
+          #   before { click_button submit }
+          #   it { should have_content("error") }
+          # end
+        end
+        
+        describe "with valid content" do
+          before { fill_in 'community_update_content', with: "Icy conditions on trail near the lake" }
+          it "should add an update" do
+            expect { click_button submit }.to change(Community::Update, :count).by(1)
+          end
+        end
+      end
+      
     end
     
   end # show trail page

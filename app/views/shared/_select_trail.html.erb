@@ -1,0 +1,14 @@
+Looking for a trail in
+<%= select_tag "state_id", options_from_collection_for_select(Common::State.all, :id, :name), 
+	{ prompt: "Select a state" } %>
+for
+<%= select_tag "activity_id", options_from_collection_for_select(Common::Activity.all, :id, :name), 
+	{ prompt: "Select an activity" } %> <br><br>
+<%= select_tag "trail_id", option_groups_from_collection_for_select(state_activity, :trail_collection,
+	:category_label, :id, :name), 
+	{ prompt: "Select a trail" } %>
+<%= link_to "Get updates", root_path, remote: true, id: "get_updates_button" %>
+<div id = 'trail_selection_message'>No trail found</div>
+
+<div id = 'home_trail_updates'>
+</div>

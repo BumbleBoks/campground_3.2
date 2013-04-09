@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403235605) do
+ActiveRecord::Schema.define(:version => 20130407190421) do
 
   create_table "common_activities", :force => true do |t|
     t.string   "name",       :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130403235605) do
   end
 
   add_index "community_updates", ["author_id"], :name => "index_community_updates_on_author_id"
+  add_index "community_updates", ["created_at"], :name => "index_community_updates_on_created_at"
   add_index "community_updates", ["trail_id"], :name => "index_community_updates_on_trail_id"
 
   create_table "users", :force => true do |t|

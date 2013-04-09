@@ -1,0 +1,12 @@
+<%= form_for @update do |f| -%>
+	<%# currently this doesn't do anything because of redirect call %>
+	<%= render 'shared/error_messages', object: f.object %>
+	
+	<%= f.hidden_field :trail_id, value: @trail.id %>
+	<div>
+		<%= f.text_area :content, placeholder: "Write an update", rows: 5 %>
+	</div>
+	<div>
+		<%= f.submit "Add update" %>
+	</div>
+<% end -%>

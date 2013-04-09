@@ -35,6 +35,7 @@ $h_font_family: "Trebuchet MS", Helvetica, sans-serif;
 
 body {
 	background: url('background.png') repeat fixed center center;
+	margin-left: 10px;
 }
 
 /* typography */
@@ -50,14 +51,15 @@ h4 {
 	font-family: $h_font_family;
 	font-size: 16px;
 	margin-top: -10px;
+	margin-bottom: 10px;
 }
 
 h5 {
-	color: lighten($h2_color, 20%);
+	color: yellowgreen;
 	text-align: center;
 	font-family: $h_font_family;
 	font-size: 14px;
-	margin-top: -10px;
+	margin-top: 0px;
 }
 
 a {
@@ -149,9 +151,16 @@ footer {
 	margin: 10px;	
 	
 	#user_display {
+		height: 550px;
 		margin: 15px;
 		border: 1px solid green;
 		background-color: ivory;
+		padding-left: 10px;
+		padding-right: 10px;
+		
+		#home_trail_updates {
+			margin-top: 30px;
+		}
 	}	
 }
 

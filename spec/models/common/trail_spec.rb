@@ -38,6 +38,11 @@ describe Common::Trail do
     it { should_not be_valid }
   end
   
+  describe "without a state" do
+    before { @trail.state_id = nil }
+    it { should_not be_valid }
+  end
+  
   describe "same trail name with same state" do
     before do
       dup_trail = state.trails.build(name: @trail.name, length: 5.0)
@@ -58,6 +63,8 @@ describe Common::Trail do
       expect { @trail.save }.to change(Common::Trail, :count).by(1)      
     end
   end  
+  
+  # TODO - test for presence of activities
   
   describe "activity associations" do
     let!(:activity) { FactoryGirl.create(:activity) }

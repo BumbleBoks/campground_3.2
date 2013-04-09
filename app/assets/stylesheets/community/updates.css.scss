@@ -1,0 +1,21 @@
+// Place all the styles related to the Community::Updates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.update_time {
+	color: gray;
+	float: left;
+	font-size: 14px;
+	font-style: italic;
+	position: absolute;
+	left: 50px;
+	border-bottom: 1px solid gray;
+	width: 80%;
+	padding-bottom: 5px;
+	display: block;	
+}
+
+.update_content {
+	font-family: helvetica;
+	font-size: 13px;
+}

@@ -23,4 +23,6 @@ class Community::Update < ActiveRecord::Base
             length: { maximum: 500 }
   validates :author_id, presence: true
   validates :trail_id, presence: true
+  
+  default_scope order: 'created_at DESC'
 end

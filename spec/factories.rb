@@ -24,6 +24,7 @@ FactoryGirl.define do
     length 10
     description "This is a great trail"
     state
+    # activities
   end
   
   factory :update, class: Community::Update do

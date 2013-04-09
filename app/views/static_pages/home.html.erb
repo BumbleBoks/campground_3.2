@@ -1,9 +1,8 @@
 <% if logged_in? %>
 	<% provide(:title, "Campground - #{current_user.name}'s Campsite") %>
-	<h2>My campsite </h2>
+	<h2>My campsite </h2>	
 <% else %>
 	<% provide(:title, "Campground") %>
 	<h2>Welcome to Campground</h2>
+	<%= render :partial => 'shared/select_trail' %>	
 <% end %>	
-<p>Find me in app/views/static_pages/home.html.erb
-	Check latest updates</p>

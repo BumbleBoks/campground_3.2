@@ -47,6 +47,12 @@ RSpec::Matchers.define :have_field_with_name_and_value do |name, value|
   end
 end
 
+RSpec::Matchers.define :have_optgroup_with_label_and_text do |label, text|
+  match do |page|
+    page.should have_selector("optgroup[label='#{label}']", text: text)
+  end
+end
+
 def log_in(user)
   visit login_path
   fill_in "Login ID", with: user.login_id.upcase

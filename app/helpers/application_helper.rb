@@ -13,4 +13,11 @@ module ApplicationHelper
       false
     end
   end
+  
+  def authorize_user
+    unless current_user
+      redirect_to root_path
+      false
+    end
+  end
 end
