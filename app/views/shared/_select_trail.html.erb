@@ -7,8 +7,13 @@ for
 <%= select_tag "trail_id", option_groups_from_collection_for_select(state_activity, :trail_collection,
 	:category_label, :id, :name), 
 	{ prompt: "Select a trail" } %>
-<%= link_to "Get updates", root_path, remote: true, id: "get_updates_button" %>
+<div id="hidden_request_path"><%= request.path %></div>
+<%= yield %>
+<%# if option.eql?("get_updates") %>
+	<%#= link_to "Get updates", "#", remote: true, id: "get_updates_button" %>
+<%# elsif option.eql?("show_trail") %>
+	<%#= link_to "Show trail", "#", remote: true, id: "show_trail_button" %>
+<%# elsif option.eql?("add_trail") %>
+	<%#= link_to "Add trail", '#', remote: true, id: "add_trail_button" %>
+<%# end %>
 <div id = 'trail_selection_message'>No trail found</div>
-
-<div id = 'home_trail_updates'>
-</div>

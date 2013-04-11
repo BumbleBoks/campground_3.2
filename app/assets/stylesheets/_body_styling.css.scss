@@ -1,0 +1,16 @@
+@mixin body_button_styling($background_color, $color) {
+	border-radius: 5px;
+	width: 150px;
+	height: 30px;
+	font-size: 15px;
+	margin-left: 20px;
+	padding: 3px;
+	text-decoration: none;
+	text-align: center;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: normal;
+	background-color: $background_color;
+	color: $color;
+	box-shadow: 2px 2px 2px olive;
+}
+

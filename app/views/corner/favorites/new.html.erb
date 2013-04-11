@@ -1,0 +1,22 @@
+<% provide(:title, "Campground - #{current_user.name}'s Favorites") %>
+
+<h2>New Favorites</h2>
+
+<%= form_tag corner_favorites_path do %>
+	<%= submit_tag "Save favorites", id: "favorites_button" %>
+
+<div id="favorite_activities">
+	<% Common::Activity.all.each do |activity| %>
+		<%= check_box_tag "user[activity_ids][]", activity.id, 
+			@current_user.activity_ids.include?(activity.id), id: dom_id(activity) %>
+		<%= label_tag dom_id(activity), activity.name, id: "nested_form" %>				
+	<% end %>			
+</div>
+
+	<%= render layout: 'corner/favorites/trails' do %>
+		<%= render layout: 'shared/select_trail' do %>
+			<%= link_to "Add trail", "#", remote: true, id: "add_trail_button" %>
+		<% end %>
+	<% end %>
+
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407190421) do
+ActiveRecord::Schema.define(:version => 20130409143833) do
 
   create_table "common_activities", :force => true do |t|
     t.string   "name",       :null => false
@@ -63,6 +63,28 @@ ActiveRecord::Schema.define(:version => 20130407190421) do
   add_index "community_updates", ["author_id"], :name => "index_community_updates_on_author_id"
   add_index "community_updates", ["created_at"], :name => "index_community_updates_on_created_at"
   add_index "community_updates", ["trail_id"], :name => "index_community_updates_on_trail_id"
+
+  create_table "corner_favorite_activities", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "activity_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "corner_favorite_activities", ["activity_id"], :name => "index_corner_favorite_activities_on_activity_id"
+  add_index "corner_favorite_activities", ["user_id", "activity_id"], :name => "index_corner_favorite_activities_on_user_id_and_activity_id", :unique => true
+  add_index "corner_favorite_activities", ["user_id"], :name => "index_corner_favorite_activities_on_user_id"
+
+  create_table "corner_favorite_trails", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "trail_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "corner_favorite_trails", ["trail_id"], :name => "index_corner_favorite_trails_on_trail_id"
+  add_index "corner_favorite_trails", ["user_id", "trail_id"], :name => "index_corner_favorite_trails_on_user_id_and_trail_id", :unique => true
+  add_index "corner_favorite_trails", ["user_id"], :name => "index_corner_favorite_trails_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "login_id",        :limit => 50,                    :null => false

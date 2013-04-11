@@ -17,6 +17,8 @@ describe Common::Activity do
   it { should respond_to(:name) }
   it { should respond_to(:activity_associations) }
   it { should respond_to(:trails) }
+  it { should respond_to(:favorite_activities) }
+  it { should respond_to(:users) }
   it { should be_valid }
   
   describe "without name" do
@@ -55,13 +57,31 @@ describe Common::Activity do
     
     it "should destroy activity_associations for the activity" do
       activity_associations = @activity.activity_associations.dup
-      activity_associations.should_not be_empty      
       @activity.destroy
-      # activity_associations.should_not be_empty
+      activity_associations.should_not be_empty
       activity_associations.each do |activity_association|
         Common::ActivityAssociation.find_by_id(activity_association.id).should be_nil
       end
     end
+  end
+  
+  describe "favorite activities" do
+    let (:user) { FactoryGirl.create(:user) }
+    
+    before do
+      @activity.save
+      user.favorite_activities.create!(activity_id: @activity.id)
+    end
+    
+    it "should destroy favorite_activities for the activity" do
+      favorite_activities = @activity.favorite_activities.dup
+      @activity.destroy
+      favorite_activities.should_not be_empty
+      favorite_activities.each do |favorite_activity|
+        Corner::FavoriteActivity.find_by_id(favorite_activity.id).should be_nil
+      end
+    end
+    
   end
   
 end

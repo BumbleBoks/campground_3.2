@@ -11,8 +11,7 @@ describe "Trail pages" do
     
     describe "without logging in" do
       before { visit new_common_trail_path }
-      it { should have_page_title("Campground") }
-      it { should have_selector('h2', text: "Welcome to Campground") }       
+      it_should_behave_like "home page when not logged in"
     end
     
     describe "as a regular user" do
@@ -84,8 +83,7 @@ describe "Trail pages" do
     
     describe "without logging in" do
       before { visit edit_common_trail_path(trail) }
-      it { should have_page_title("Campground") }
-      it { should have_selector('h2', text: "Welcome to Campground") }       
+      it_should_behave_like "home page when not logged in"
     end
     
     describe "as a regular user" do
@@ -143,7 +141,8 @@ describe "Trail pages" do
     it { should have_selector('h4', text: "in Idaho") }
     it { should have_content("This trail is 8.0 miles long") }
     it { should have_content("Short trail") }
-    it { should have_selector('h5', text: "for Cross country skiing , Cycling") }
+    it { should have_selector('h5', text: "Cycling") }
+    it { should have_selector('h5', text: "Cross country skiing") }
     
     describe "without logging in" do
       it { should_not have_button("Add update") }

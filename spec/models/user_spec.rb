@@ -27,6 +27,10 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:updates) }
+  it { should respond_to(:favorite_activities) }
+  it { should respond_to(:activities) }
+  it { should respond_to(:favorite_trails) }
+  it { should respond_to(:trails) }
   
   it { should be_valid }
   it { should_not be_admin }
@@ -230,5 +234,39 @@ describe User do
       end
     end
   end
+  
+  describe "favorite activity associations" do
+    let(:activity) { FactoryGirl.create(:activity) }
+    before do
+      @user.save
+      @user.favorite_activities.create!(activity_id: activity.id)
+    end
+    it "should destroy favorite activity associations for the user" do
+      favorite_activities = @user.favorite_activities.dup
+      @user.destroy
+      favorite_activities.should_not be_empty
+      favorite_activities.each do |favorite_activity|
+        Corner::FavoriteActivity.find_by_id(favorite_activity.id).should be_nil
+      end
+    end    
+  end
+  
+  describe "favorite trail associations" do
+    let!(:trail) { create_trail }
+    before do
+      @user.save
+      @user.favorite_trails.create!(trail_id: trail.id)
+    end
+    it "should destroy favorite trails associations for the user" do
+      favorite_trails = @user.favorite_trails.dup
+      @user.destroy
+      favorite_trails.should_not be_empty
+      favorite_trails.each do |favorite_trail|
+        Corner::FavoriteTrail.find_by_id(favorite_trail.id).should be_nil
+      end
+    end
+    
+  end
+  
   
 end

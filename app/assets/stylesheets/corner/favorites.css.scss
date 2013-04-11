@@ -1,0 +1,40 @@
+// Place all the styles related to the Corner::Favorites controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "body_styling";
+
+/* mixins */
+@mixin favorites_styling {
+	border-bottom: 1px solid gray;
+	border-radius: 8px;
+	padding-top: 10px;
+	background-color: oldlace;
+	padding-bottom: 5px;	
+	padding-left: 20px;
+}
+
+#favorite_activities {
+	@include favorites_styling;
+	margin-bottom: 20px;
+}
+
+#favorite_trails {
+	margin-top: 10px;
+	@include favorites_styling;
+}
+
+
+#favorites_button {
+	@include body_button_styling(tan, oldlace);
+	position: absolute;
+	top: 80px;
+	right: 30px;
+	padding: 0 3px 3px 0;
+	height: 40px;
+	a {
+		color:oldlace;
+		position: relative;
+		top: 12px;		
+	}
+}

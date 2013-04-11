@@ -20,4 +20,18 @@ module ApplicationHelper
       false
     end
   end
+  
+  def output_with_commas(elements, attribute)
+    output_string = ""
+    if elements.first.respond_to?(attribute)
+      elements.each do |element|
+        if !(element == elements.first) 
+    			output_string += ", "
+    		end
+    		output_string += element.send(attribute).to_s 		    
+      end
+      output_string
+    end
+  end
+  
 end

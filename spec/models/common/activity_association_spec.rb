@@ -19,6 +19,10 @@ describe Common::ActivityAssociation do
   
   subject { activity_association }
   it { should be_valid }
+  it { should respond_to(:trail_id) }
+  it { should respond_to(:activity_id) }
+  it { should respond_to(:trail) }
+  it { should respond_to(:activity) }
   
   describe "when trail id is not present" do
     before { activity_association.trail_id = nil }

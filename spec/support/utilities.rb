@@ -12,7 +12,7 @@ shared_examples_for "all pages without logging in" do
 end
 
 # test for layout with user logged in - should be run for all pages  
-shared_examples_for "all pages for logged in user" do |user|
+shared_examples_for "all pages for logged in user" do
   it { should have_css("#user_individual") }
   it { should have_css("#user_community") }
   it { should have_css("#user_dynamic") }
@@ -24,6 +24,11 @@ shared_examples_for "all pages for logged in user" do |user|
   it { should have_link("Log out", logout_path) }
 end
 
+# test for home page when user is not logged in
+shared_examples_for "home page when not logged in" do
+  it { should have_page_title("Campground") }
+  it { should have_selector('h2', text: "Welcome to Campground") }       
+end
 
 RSpec::Matchers.define :have_page_title do |title|
   match do |page|

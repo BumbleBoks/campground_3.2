@@ -16,8 +16,7 @@ describe "Static pages" do
     
     it_should_behave_like "all pages without logging in"
 
-    it { should have_page_title("Campground") }
-    it { should have_selector('h2', text: "Welcome to Campground") }
+    it_should_behave_like "home page when not logged in"
     
     it { should have_select('state_id') }
     it { should have_select('activity_id') } 
@@ -54,8 +53,8 @@ describe "Static pages" do
           @update2 = user.updates.create!(trail_id: @trail_two.id, content: "Flowers blooming") 
 
           visit root_path
-          # select state.name
-          # select activity.name
+          select state.name
+          select activity.name
           click_link "Get updates"
           # select state.name
           # select activity.name
@@ -64,7 +63,7 @@ describe "Static pages" do
         end
         
         # # TODO try with phantomJS
-        # describe "should have heading", js: true do
+        # describe "should have heading" do
         #   it { should have_content("Updates for #{@trail_one.name}") }
         # end
         # 

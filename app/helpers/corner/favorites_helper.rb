@@ -1,0 +1,2 @@
+module Corner::FavoritesHelper
+end

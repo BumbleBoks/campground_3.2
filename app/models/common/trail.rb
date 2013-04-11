@@ -25,6 +25,10 @@ class Common::Trail < ActiveRecord::Base
            class_name: "Community::Update", 
            foreign_key: "trail_id",
            dependent: :destroy
+           
+  has_many :favorite_trails, class_name: "Corner::FavoriteTrail", 
+           foreign_key: "trail_id", dependent: :destroy
+  has_many :users, class_name: "User", through: :favorite_trails
 
   VALID_NAME_REGEX = /^[A-Za-z\d_]+( |\w)*$/
   validates :name, presence: true,

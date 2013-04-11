@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
            foreign_key: "author_id",
            dependent: :destroy
   
+  has_many :favorite_activities, class_name: "Corner::FavoriteActivity", 
+           foreign_key: "user_id", dependent: :destroy
+  has_many :activities, class_name: "Common::Activity", through: :favorite_activities
+  
+  has_many :favorite_trails, class_name: "Corner::FavoriteTrail", 
+           foreign_key: "user_id", dependent: :destroy
+  has_many :trails, class_name: "Common::Trail", through: :favorite_trails
+  
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
             uniqueness: { case_sensitive: false },

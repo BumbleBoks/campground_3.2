@@ -26,6 +26,8 @@ describe Common::Trail do
   it { should respond_to(:activity_associations) }
   it { should respond_to(:activities) }
   it { should respond_to(:updates) }
+  it { should respond_to(:favorite_trails) }
+  it { should respond_to(:users) }
   it { should be_valid }
   
   describe "without name" do
@@ -96,4 +98,23 @@ describe Common::Trail do
       end
     end
   end
+
+  describe "favorite trails associations" do
+    let!(:user) { FactoryGirl.create(:user) }
+    before do
+      @trail.save
+      user.favorite_trails.create!(trail_id: @trail.id)
+    end 
+    
+    it "should destroy favorite trails associations for the trail" do
+      favorite_trails = @trail.favorite_trails.dup
+      @trail.destroy
+      favorite_trails.should_not be_empty
+      favorite_trails.each do |favorite_trail|
+        Corner::FavoriteTrail.find_by_id(favorite_trail.id).should be_nil
+      end
+    end
+  end
+
+
 end

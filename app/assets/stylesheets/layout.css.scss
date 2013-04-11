@@ -1,3 +1,5 @@
+@import "body_styling";
+
 /* variables */
 $static_background: rgba(210, 180, 140, 0.5);
 $static_border: 2px solid brown;
@@ -65,6 +67,11 @@ h5 {
 a {
 	color: saddlebrown;
 	text-decoration: none;
+}
+
+li {
+	list-style-type: none;
+	padding-bottom: 5px;
 }
 
 /* header */
@@ -179,4 +186,8 @@ footer {
 
 .inactive {
 	opacity: 0.5;
+}
+
+#hidden_request_path {
+	display: none;
 }

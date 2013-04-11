@@ -15,6 +15,10 @@ class Common::Activity < ActiveRecord::Base
            foreign_key: "activity_id", dependent: :destroy
   has_many :trails, class_name: "Common::Trail", through: :activity_associations
   
+  has_many :favorite_activities, class_name: "Corner::FavoriteActivity", 
+           foreign_key: "activity_id", dependent: :destroy
+  has_many :users, class_name: "User", through: :favorite_activities
+  
   VALID_NAME_REGEX = /^[A-Za-z\d_]+( |\w)*$/
   validates :name,  presence: true,
             uniqueness: { case_sensitivity: false },

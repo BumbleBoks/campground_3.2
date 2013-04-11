@@ -18,6 +18,13 @@ Campground::Application.routes.draw do
   namespace :community do
     resource :updates, only: [:create]
   end
+  
+  get 'favorites/show', to: 'corner/favorites#show', as: 'favorites/show'
+  get 'favorites/new', to: 'corner/favorites#new', as: 'favorites/new'
+  
+  namespace :corner do
+    resources :favorites, only: [:create]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

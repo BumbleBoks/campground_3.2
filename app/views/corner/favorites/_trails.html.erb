@@ -1,0 +1,16 @@
+<div id="favorite_trails">
+	<h4>Trails</h4>
+	<ul>
+		<% @current_user.trails.each do |trail| %>
+			<li>
+				<%= hidden_field_tag "user[trail_ids][]", trail.id -%>
+				<%= trail.name %>, <%= trail.state.name -%>
+				<%= link_to "delete", "#", class:"delete_favorite_trail" -%>
+			</li>
+		<% end %>
+	</ul>	
+</div>	
+<br><br>
+<div id="add_trail_to_favorites">
+	<%= yield %>
+</div>
