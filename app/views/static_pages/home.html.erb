@@ -1,6 +1,7 @@
 <% if logged_in? %>
 	<% provide(:title, "Campground - #{current_user.name}'s Campsite") %>
 	<h2>My campsite </h2>
+	
 	<% if @updates.any? %>	
 		<%= render partial: 'shared/update', collection: @updates %>	
 	<% else %>
@@ -11,6 +12,7 @@
 <% else %>
 	<% provide(:title, "Campground") %>
 	<h2>Welcome to Campground</h2>
+	
 	<h4>Updates</h4>
 	<%= render layout: 'shared/select_trail' do %>
 		<%= link_to "Get updates", "#", remote: true, id: "get_updates_button" %>

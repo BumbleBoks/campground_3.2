@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: corner_favorite_trails
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  trail_id   :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Corner::FavoriteTrail < ActiveRecord::Base
   attr_accessible :trail_id
   

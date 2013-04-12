@@ -1,5 +1,6 @@
 <% provide(:title, "Campground - #{@trail.name}") %>
 <h2><%= @trail.name %></h2>
+
 <h4>in <%= @trail.state.name %></h4>
 <% if @trail.activities.any? %>
 	<h5>for <%= output_with_commas(@trail.activities, :name) %>

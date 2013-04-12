@@ -95,6 +95,7 @@ describe "Static pages" do
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_selector('h2', text: "My campsite") } 
       it { should have_content(@trail_one.name) }
+      it { should have_content(user.login_id) }
       it { should have_content(@update1.content) }
       it { should_not have_content(@trail_two.name) }
       it { should_not have_content(@update2.content) }      

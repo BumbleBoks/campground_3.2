@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: corner_favorite_activities
+#
+#  id          :integer          not null, primary key
+#  user_id     :integer          not null
+#  activity_id :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Corner::FavoriteActivity do

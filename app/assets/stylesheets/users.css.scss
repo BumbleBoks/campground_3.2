@@ -1,3 +1,22 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$photo_height: 150px;
+$photo_width: 150px;
+
+#user_profile_photo {
+	border: 1px solid grey;
+	width: $photo_width;
+	height: $photo_height;
+}
+
+#user_profile_info {
+	margin-top: -$photo_height;
+	margin-left: $photo_width + 50px;
+}
+
+#user_profile_updates {
+	margin-top: 100px;
+}
+

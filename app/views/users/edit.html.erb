@@ -1,0 +1,45 @@
+<% provide(:title, "Campground - Profile") %>
+<h2>Changing Profile</h2>
+
+<div id = "other_links_button">
+	<%= link_to "Change favorites", favorites_new_path %>
+</div>	
+
+
+<div class="project_form">
+	<%= form_for @user do |f| -%>
+
+		<%= render 'shared/error_messages', object: f.object%>
+
+		<div>
+			<%= f.label :login_id, "Login ID" %>
+			<%= f.text_field :login_id  %>						
+		</div>
+
+		<div>
+			<%= f.label :name, "Name" %>
+			<%= f.text_field :name  %>		
+		</div>
+
+		<div>
+			<%= f.label :email, "Email" %>
+			<%= f.text_field :email  %>
+		</div>
+		
+		<div>
+			<%= f.label :password, "Password" %>
+			<%= f.password_field :password  %>
+		</div>
+
+		<div>
+			<%= f.label :password_confirmation, "Confirm password" %>
+			<%= f.password_field :password_confirmation  %>
+		</div>		
+				
+		<div>
+			<%= f.submit "Save Profile" %>			
+		</div>
+
+	<% end -%>	
+</div>
+ 

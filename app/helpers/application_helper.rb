@@ -13,6 +13,13 @@ module ApplicationHelper
     end
   end
   
+  def guest_user
+    if logged_in?
+      redirect_to root_path
+      false
+    end
+  end
+  
   def div_for_side_panes
     if logged_in? 
       div_name = "title_board"

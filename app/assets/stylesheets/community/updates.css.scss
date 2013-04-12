@@ -20,10 +20,19 @@
 	border-bottom: 1px solid gray;
 	width: 80%;
 	padding-bottom: 5px;
-	display: block;	
+	display: inline;	
+}
+
+.update_author {
+	color: maroon;
+	margin-left: 140px;
+	font-size: 14px;
+	font-style: italic;	
 }
 
 .update_content {
 	font-family: helvetica;
 	font-size: 13px;
+	margin-bottom: 5px;
+	display: block;
 }

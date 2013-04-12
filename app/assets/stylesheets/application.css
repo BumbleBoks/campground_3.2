@@ -15,4 +15,5 @@
  @import "forms.css.scss";
  @import "static_pages.css.scss";
  @import "community/updates.css.scss";
- @import "corner/favorites.css.scss"
+ @import "corner/favorites.css.scss";
+ @import "users.css.scss"

@@ -1,9 +1,8 @@
 <% provide(:title, "Campground - #{current_user.name}'s Favorites") %>
-
 <h2>New Favorites</h2>
 
 <%= form_tag corner_favorites_path do %>
-	<%= submit_tag "Save favorites", id: "favorites_button" %>
+	<%= submit_tag "Save favorites", id: "other_links_button" %>
 
 <div id="favorite_activities">
 	<% Common::Activity.all.each do |activity| %>

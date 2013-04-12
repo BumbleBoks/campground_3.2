@@ -64,11 +64,92 @@ describe "UserPages" do
         it { should have_link("Profile", user_path(user)) }
         it { should_not have_link("Join") }
         it { should_not have_link("Log in") }
-      end
+      end      
+    end   
+  end # joining process
+  
+  describe "show page" do
+    let (:user) { FactoryGirl.create(:user) }
+    let (:other_user) { FactoryGirl.create(:user) }
+    let (:trail) { create_trail }
+    let(:update) { user.updates.create(trail_id: trail.id, content: "Trail closed") }
+
+    before { visit user_path (user) }
+    
+    it_should_behave_like "home page when not logged in"
+    
+    describe "after logging in" do
+      before do
+        user.favorite_activities.create(activity_id: Common::Activity.find_by_name("Cycling").id)
+        update.save
+        log_in user
+        visit user_path(user)
+      end      
+      it { should have_page_title("Campground - #{user.name}") }
+      it { should have_selector('h2', text: "About #{user.name}") }
+      it { should have_link('Change profile', edit_user_path(user)) }
       
+      it { should have_content("#{user.name}") }
+      it { should have_content("#{user.email}") }
+      it { should have_content("Cycling") }
+      it { should have_content(update.content) }      
     end
     
+    describe "visiting other user's profile" do
+      before do
+        log_in user
+        visit user_path(other_user) 
+      end
+      
+      it { should have_page_title("Campground - #{other_user.name}") }
+      it { should have_selector('h2', text: "About #{other_user.name}") }
+      it { should_not have_link('Change Profile') }
+    end      
+  end # show page
+  
+  describe "edit page" do
+    let (:user) { FactoryGirl.create(:user) }
+    let (:other_user) { FactoryGirl.create(:user) }
+
+    describe "without logging in" do
+      before { visit edit_user_path(user) }
+      it_should_behave_like "home page when not logged in"
+    end
+    
+    describe "after logging in" do
+      before do
+        log_in user
+        visit edit_user_path(user)
+      end 
+      
+      it { should have_page_title("Campground - Profile") }
+      it { should have_selector('h2', text: "Changing Profile") }
+      it { should have_link('Change favorites', favorites_new_path) }
+      
+      describe "after submitting new values" do
+        before do
+          fill_in "Login ID", with: "examplefoo"
+          fill_in "Name", with: "Example Foo"
+          fill_in "Email", with: "examplefoo@example.com"
+          fill_in "Password", with: "1password"
+          fill_in "Confirm password", with: "1password"
+          click_button "Save Profile"
+        end
+
+        it { should have_selector('h2', text: "About Example Foo") }
+        it { should have_content("examplefoo@example.com") }
+      end 
+    end # after logging in
+         
+    describe "editing other user's profile" do
+      before do
+        log_in user
+        visit edit_user_path(other_user)
+      end
+      
+      it { should have_page_title("Campground - #{user.name}'s Campsite") }
+      it { should have_selector('h2', text: "My campsite") } 
+    end
     
   end
-  
 end

@@ -191,6 +191,24 @@ footer {
 	opacity: 0.5;
 }
 
+#other_links_button {
+	@include body_button_styling(tan, oldlace);
+	position: absolute;
+	top: 80px;
+	right: 30px;
+	padding: 0 3px 3px 0;
+	height: 40px;
+	a {
+		color:oldlace;
+		position: relative;
+		top: 12px;		
+	}
+}
+
+#hidden {
+	display: none;
+}
+
 #hidden_request_path {
 	display: none;
 }

@@ -1,4 +1,4 @@
-<% if logged_in? && request.path =='/' %>
+<% if logged_in? %>
 	<span class="update_trail">
 		<%= update.trail.name %>
 	</span>
@@ -8,4 +8,9 @@
 </span>
 <span class="update_time">
 	Posted <%= time_ago_in_words(update.created_at) %> ago
+</span>
+<span class="update_author">
+	<% if logged_in? %>
+		by <%= update.author.login_id %>
+	<% end %>
 </span>

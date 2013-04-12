@@ -1,0 +1,19 @@
+<% provide(:title, "Campground - #{@user.name}") %>
+<h2>About <%= @user.name %></h2>
+
+<% if current_user?(@user) %>
+	<div id = "other_links_button">
+		<%= link_to "Change profile", edit_user_path(@user) %>
+	</div>	
+<% end %>
+<div id="user_profile_photo">
+	Add a photo
+</div>
+<div id="user_profile_info">
+	<%= @user.email %><br><br>
+	Interested in <%= output_with_commas(@user.activities, :name) %>
+</div>
+<div id="user_profile_updates">
+	<h4>Updates by <%= @user.name %></h4>
+	<%= render partial: 'shared/update', collection: @user.updates %>
+</div>
