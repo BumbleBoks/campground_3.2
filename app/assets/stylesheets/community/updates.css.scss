@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.update_trail {
+	color: lighten(darkgreen, 10%);
+	font-size: 15px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	display: block;
+}
+
 .update_time {
 	color: gray;
 	float: left;

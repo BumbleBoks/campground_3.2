@@ -1,6 +1,12 @@
 <div id="user_individual">	
 	<% div_name = div_for_side_panes %>
-	<%= content_tag(:div, content_tag(:div, "Diary", class: "title_text"), class: div_name )%>
-	<%= content_tag(:div, content_tag(:div, "Favorites", class: "title_text"), class: div_name )%>
-	<%= content_tag(:div, content_tag(:div, "Trips", class: "title_text"), class: div_name )%>
+	<%= content_tag(:div, class: div_name ) do %>
+		<%= link_to "Favorites", favorites_show_path, class: "title_text" %>
+	<% end %>
+	<%= content_tag(:div, class: div_name ) do %>
+		<%= link_to "Diary", "#", class: "title_text" %>
+	<% end %>
+	<%= content_tag(:div, class: div_name ) do %>
+		<%= link_to "Trips", "#", class: "title_text" %>
+	<% end %>
 </div>

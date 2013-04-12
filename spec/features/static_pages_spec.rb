@@ -78,12 +78,26 @@ describe "Static pages" do
     end
     
     describe "for logged in user" do
-      before { log_in user }
+      before do
+        @trail_one = FactoryGirl.create(:trail, name: "Trail One", state: state, activity_ids: activity.id) 
+        @trail_two = FactoryGirl.create(:trail, name: "Trail Two", state: state, activity_ids: activity.id) 
+        @update1 = user.updates.create!(trail_id: @trail_one.id, content: "Icy patches on trail") 
+        @update2 = user.updates.create!(trail_id: @trail_two.id, content: "Flowers blooming") 
+        
+        user.favorite_trails.create(trail_id: @trail_one.id)
+        log_in user
+      end
       
       it_should_behave_like "all pages for logged in user"      
       it { should have_link("Profile", user_path(user)) }
+      it { should have_link("Favorites", favorites_show_path) }
+      
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_selector('h2', text: "My campsite") } 
+      it { should have_content(@trail_one.name) }
+      it { should have_content(@update1.content) }
+      it { should_not have_content(@trail_two.name) }
+      it { should_not have_content(@update2.content) }      
     end    
   end
   

@@ -1,0 +1,11 @@
+<% if logged_in? && request.path =='/' %>
+	<span class="update_trail">
+		<%= update.trail.name %>
+	</span>
+<% end %>
+<span class="update_content">
+	<%= wrap(update.content) %>
+</span>
+<span class="update_time">
+	Posted <%= time_ago_in_words(update.created_at) %> ago
+</span>
