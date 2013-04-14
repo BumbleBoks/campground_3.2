@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX }
   VALID_PASSWORD_REGEX = /.*[a-zA-z]+.*\d+.*|.*\d+.*[a-zA-z]+.*/
-  validates :password,
+  validates :password, presence: true,
             length: { minimum: 6 },
             format: { with: VALID_PASSWORD_REGEX }
   validates :password_confirmation, presence: true
@@ -50,4 +50,35 @@ class User < ActiveRecord::Base
     email.downcase!
   end
 
+  def update_partial_attributes(user_params)    
+    self.validate_partial_attributes(user_params)    
+    unless self.errors.any?
+      user_params.keys.each do |key|
+        self.update_attribute(key, user_params[key])        
+      end
+    end
+    
+    !self.errors.any?
+  end
+
+  private
+  def validate_partial_attributes(user_params)
+    self.update_attributes(user_params)
+    original_errors = self.errors.dup
+    self.populate_errors(original_errors) if self.errors.any?
+  end  
+    
+  
+  def populate_errors(add_errors)
+    self.errors.clear
+
+      add_errors.messages.keys.each do |key|          
+        if user_params.has_key?(key)
+          add_errors.messages[key].each do |message|
+            self.errors.add(key, message)
+          end # add error message 
+        end #key in user_params        
+    end    
+  end # populate_errors
+  
 end

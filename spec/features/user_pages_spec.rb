@@ -126,19 +126,34 @@ describe "UserPages" do
       it { should have_selector('h2', text: "Changing Profile") }
       it { should have_link('Change favorites', favorites_new_path) }
       
-      describe "after submitting new values" do
+      describe "on submitting invalid values" do
+        before do
+          fill_in "Login ID", with: other_user.login_id
+          fill_in "Name", with: ""
+          fill_in "Email", with: "examplefoo@example"
+          click_button "Save Profile"
+        end
+
+        it { should have_selector('h2', text: "Changing Profile") }
+        it { should have_content('error') }
+        it { should have_content('Login has already been taken') }
+        it { should have_content('Name can\'t be blank') }
+        it { should have_content('Email is invalid') }
+      end # invalid values
+      
+      describe "after submitting valid values" do
         before do
           fill_in "Login ID", with: "examplefoo"
           fill_in "Name", with: "Example Foo"
           fill_in "Email", with: "examplefoo@example.com"
-          fill_in "Password", with: "1password"
-          fill_in "Confirm password", with: "1password"
+          # fill_in "Password", with: "1password"
+          # fill_in "Confirm password", with: "1password"
           click_button "Save Profile"
         end
 
         it { should have_selector('h2', text: "About Example Foo") }
         it { should have_content("examplefoo@example.com") }
-      end 
+      end # valid values
     end # after logging in
          
     describe "editing other user's profile" do

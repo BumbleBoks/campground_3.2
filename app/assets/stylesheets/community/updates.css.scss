@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "body_styling";
+
 .update_trail {
 	color: lighten(darkgreen, 10%);
 	font-size: 15px;

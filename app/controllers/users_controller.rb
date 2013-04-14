@@ -25,8 +25,8 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
   end
 
-  def update
-    if @user.update_attributes(params[:user])
+  def update    
+    if @user.update_partial_attributes(params[:user])
       redirect_to @user
     else
       render 'edit'
@@ -41,5 +41,5 @@ class UsersController < ApplicationController
       false
     end
   end
-
+  
 end
