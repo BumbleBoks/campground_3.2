@@ -23,12 +23,18 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by_id(params[:id])
+    @page = params[:page] || 1
   end
 
-  def update    
-    if @user.update_partial_attributes(params[:user])
-      redirect_to @user
+  def update   
+    if @user.update_partial_attributes(params[:user]) 
+      if params[:page].present? && params[:page].to_i.eql?(2)
+        redirect_to edit_user_path(@user)
+      else  
+        redirect_to @user
+      end
     else
+      @page = params[:page]
       render 'edit'
     end
   end

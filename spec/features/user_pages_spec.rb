@@ -125,7 +125,7 @@ describe "UserPages" do
       it { should have_page_title("Campground - Profile") }
       it { should have_selector('h2', text: "Changing Profile") }
       it { should have_link('Change favorites', favorites_new_path) }
-      
+        
       describe "on submitting invalid values" do
         before do
           fill_in "Login ID", with: other_user.login_id
@@ -154,6 +154,58 @@ describe "UserPages" do
         it { should have_selector('h2', text: "About Example Foo") }
         it { should have_content("examplefoo@example.com") }
       end # valid values
+      
+      describe "on clicking password change button" do
+        before do
+          click_link "Change password"
+        end
+        
+        it { should have_selector('h2', text: "Changing Password") }
+        it { should have_selector('label', text: "New password") }
+        it { should have_selector('label', text: "Confirm new password") }
+        
+        describe "changing password with incorrect authentication" do
+          before do
+            fill_in "Current password", with: ""
+            fill_in "New password", with: "1password"
+            fill_in "Confirm new password", with: "1password"
+            click_button "Save password"
+          end
+          
+          it { should have_content("Current password is not correct. User authentication failed") }
+          
+        end
+
+        describe "changing password with correct authentication and invalid passwords" do
+          before do
+            fill_in "Current password", with: user.password
+            fill_in "New password", with: ""
+            fill_in "Confirm new password", with: "1password"
+            click_button "Save password"
+          end
+          
+          it { should have_content("Password doesn\'t match confirmation") };
+          it { should have_content("Password can\'t be blank") };
+          it { should have_content("Password is too short (minimum is 6 characters)") };
+          it { should have_content("Password is invalid") };
+          
+        end
+
+        describe "changing password with correct authentication and valid passwords" do
+          before do
+            fill_in "Current password", with: user.password
+            fill_in "New password", with: "1password"
+            fill_in "Confirm new password", with: "1password"
+            click_button "Save password"
+          end
+          
+          it { should have_selector('h2', text: "Changing Profile") }
+          it { should have_selector('label', text: 'Login ID') }
+          
+        end
+
+      end # valid values
+      
     end # after logging in
          
     describe "editing other user's profile" do

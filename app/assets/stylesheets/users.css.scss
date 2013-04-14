@@ -1,6 +1,7 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "body_styling";
 
 $photo_height: 150px;
 $photo_width: 150px;
@@ -19,4 +20,19 @@ $photo_width: 150px;
 #user_profile_updates {
 	margin-top: 100px;
 }
+
+#change_password_button {
+	@include body_button_styling(coral, oldlace);
+	margin: 20px;
+	position: relative;
+	left: 100px;
+	
+	a {
+		color:oldlace;
+		position: relative;
+		top: 5px;		
+	}
+}
+
+
 

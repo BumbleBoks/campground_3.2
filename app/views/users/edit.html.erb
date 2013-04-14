@@ -1,35 +1,67 @@
 <% provide(:title, "Campground - Profile") %>
-<h2>Changing Profile</h2>
+<% if @page.to_i.eql?(1) %>
+	<h2>Changing Profile</h2>
+<% end %>
+	
+<% if @page.to_i.eql?(2) %>
+	<h2>Changing Password</h2>
+<% end %>
 
 <div id = "other_links_button">
 	<%= link_to "Change favorites", favorites_new_path %>
 </div>	
 
-
 <div class="project_form">
 	<%= form_for @user do |f| -%>
+	
+		<%= render 'shared/error_messages', object: f.object %>
 
-		<%= render 'shared/error_messages', object: f.object%>
+		<% if @page.to_i.eql?(1) %>
+			<div>
+				<%= f.label :login_id, "Login ID" %>
+				<%= f.text_field :login_id  %>						
+			</div>
 
-		<div>
-			<%= f.label :login_id, "Login ID" %>
-			<%= f.text_field :login_id  %>						
-		</div>
+			<div>
+				<%= f.label :name, "Name" %>
+				<%= f.text_field :name  %>		
+			</div>
 
-		<div>
-			<%= f.label :name, "Name" %>
-			<%= f.text_field :name  %>		
-		</div>
+			<div>
+				<%= f.label :email, "Email" %>
+				<%= f.text_field :email  %>
+			</div>
+				
+			<div id = "change_password_button">
+				<%= link_to "Change password", edit_user_path(@user, page: 2) %>
+			</div>	
 
-		<div>
-			<%= f.label :email, "Email" %>
-			<%= f.text_field :email  %>
-		</div>
-						
-		<div>
-			<%= f.submit "Save Profile" %>			
-		</div>
+			<div>
+				<%= hidden_field_tag "page", 1 %>
+				<%= f.submit "Save Profile" %>			
+			</div>
+		<% end %>
 
+		<% if @page.to_i.eql?(2) %>
+			<div>
+				<%= f.label :current_password, "Current password" %>
+				<%= f.password_field :current_password  %>						
+			</div>
+			<div>
+				<%= f.label :password, "New password" %>
+				<%= f.password_field :password  %>						
+			</div>
+
+			<div>
+				<%= f.label :password_confirmation, "Confirm new password" %>
+				<%= f.password_field :password_confirmation  %>						
+			</div>
+				
+			<div>
+				<%= hidden_field_tag "page", 2 %>
+				<%= f.submit "Save password" %>			
+			</div>
+		<% end %>
 	<% end -%>	
 </div>
  

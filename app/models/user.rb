@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :login_id, :name, :email, :password, :password_confirmation
+  attr_accessible :login_id, :name, :email, :password, :password_confirmation, :current_password
   has_secure_password
   
   has_many :updates, 
@@ -49,27 +49,62 @@ class User < ActiveRecord::Base
     login_id.downcase! 
     email.downcase!
   end
-
-  def update_partial_attributes(user_params)    
-    self.validate_partial_attributes(user_params)    
-    unless self.errors.any?
-      user_params.keys.each do |key|
-        self.update_attribute(key, user_params[key])        
-      end
+  
+  # virtual attributes  
+  def current_password=(password)
+    self.current_password=password if password.present?
+  end
+  
+  
+  # class methods
+  def self.partial_params
+    [["current_password", "password", "password_confirmation"], ["login_id", "name", "email"]]    
+  end
+  
+  def self.password_partial_params?(user_params)
+    user_params.keys.eql?(partial_params[0])
+  end
+  
+  # instance methods
+  def update_partial_attributes(user_params)  
+    unless self.class.partial_params.include?(user_params.keys)
+      self.errors.add("parmeters", "cannot be updated!")
     end
     
+    if self.class.password_partial_params?(user_params)
+      if self.authenticate(user_params["current_password"]) 
+        user_params.delete(:current_password)
+      else
+        self.errors.add("current_password", "is not correct. User authentication failed")
+      end
+    end
+
+    unless self.errors.any?
+      self.assign_partial_attributes(user_params)
+    end
+
     !self.errors.any?
   end
 
-  private
+
+  def assign_partial_attributes(user_params)
+    if self.validate_partial_attributes(user_params)    
+      user_params.keys.each do |key|
+        self.update_attribute(key, user_params[key])        
+      end
+    end      
+  end
+  
+  
   def validate_partial_attributes(user_params)
     self.update_attributes(user_params)
     original_errors = self.errors.dup
-    self.populate_errors(original_errors) if self.errors.any?
+    self.populate_errors_for_params(original_errors, user_params) if self.errors.any?
+    !self.errors.any?
   end  
     
   
-  def populate_errors(add_errors)
+  def populate_errors_for_params(add_errors, user_params)
     self.errors.clear
 
       add_errors.messages.keys.each do |key|          
