@@ -4,10 +4,6 @@ describe "Static pages" do
   let (:user) { FactoryGirl.create(:user) }
   let (:state) { Common::State.find_by_name("Colorado") }
   let (:activity) { Common::Activity.find_by_name("Cycling") }  
-  # let (:trail_one) { FactoryGirl.create(:trail, name: "Trail One", state: state, activity_ids: activity.id) }
-  # let (:trail_two) { FactoryGirl.create(:trail, name: "Trail Two", state: state, activity_ids: activity.id) }
-  # let (:update1) { user.updates.create!(trail_id: trail_one.id, content: "Icy patches on trail") }
-  # let (:update2) { user.updates.create!(trail_id: trail_two.id, content: "Flowers blooming") }
   
   subject { page }
     
@@ -89,8 +85,9 @@ describe "Static pages" do
       end
       
       it_should_behave_like "all pages for logged in user"      
-      it { should have_link("Profile", user_path(user)) }
-      it { should have_link("Favorites", favorites_show_path) }
+      it { should have_link("Profile", href: user_path(user)) }
+      it { should have_link("Favorites", href: favorites_show_path) }
+      it { should have_link("Trails", href: common_trails_path) }
       
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_selector('h2', text: "My campsite") } 
@@ -98,7 +95,25 @@ describe "Static pages" do
       it { should have_content(user.login_id) }
       it { should have_content(@update1.content) }
       it { should_not have_content(@trail_two.name) }
-      it { should_not have_content(@update2.content) }      
+      it { should_not have_content(@update2.content) } 
+      
+      describe "check links in two columns" do
+        describe "on clicking Favorites" do
+          before { click_link "Favorites" }
+          
+          it { should have_page_title("Campground - #{user.name}'s Favorites") }
+          it { should have_selector('h2', text: "My Favorites") }           
+        end
+        
+        describe "on clicking Trails" do
+          before { click_link "Trails" }
+          
+          it { should have_page_title("Campground - Trails") }
+          it { should have_selector('h2', "Search Trails") }
+        end
+
+      end # check column links
+           
     end    
   end
   
@@ -117,7 +132,7 @@ describe "Static pages" do
       end
       
       it_should_behave_like "all pages for logged in user"      
-      it { should have_link("Profile", user_path(user)) }
+      it { should have_link("Profile", href: user_path(user)) }
       it { should have_page_title("About Campground") }
       it { should have_selector('h2', text: "About") } 
     end

@@ -146,6 +146,8 @@ describe "Trail pages" do
     
     describe "without logging in" do
       it { should_not have_button("Add update") }
+      it { should_not have_button('Add to favorites') }
+      it { should_not have_button('Remove from favorites') }
     end
     
     describe "as a regular user" do
@@ -154,6 +156,8 @@ describe "Trail pages" do
         visit common_trail_path(trail)
       end
       it { should have_button("Add update") }
+      it { should have_button('Add to favorites') }
+      it { should_not have_button('Remove from favorites') }    
       
       describe "adding an update" do
         describe "with empty content" do
@@ -172,8 +176,35 @@ describe "Trail pages" do
           it "should add an update" do
             expect { click_button submit }.to change(Community::Update, :count).by(1)
           end
+          
+          describe "should show updates" do
+            before { click_button submit }
+            
+            it { should have_content("Icy conditions on trail near the lake") }
+          end
         end
+      end #adding update
+      
+      describe "adding trail to favorites" do
+        before { click_button "Add to favorites" }
+        
+        it { should have_page_title("Campground - #{user.name}'s Favorites") }
+        it { should have_selector('h4', text: "Trails") }
+        it { should have_content("#{trail.name}, #{trail.state.name}") } 
+        
+        describe "and revisiting the trail page" do
+          before { visit common_trail_path(trail) }
+          
+          it { should have_page_title("Campground - Old Trail") }
+          it { should have_selector('h2', text: "Old Trail") }
+          it { should have_button('Remove from favorites') }
+          it { should_not have_button('Add to favorites') }
+        end
+        
       end
+      
+      
+      
       
     end
     

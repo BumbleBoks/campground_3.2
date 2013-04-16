@@ -1,0 +1,6 @@
+<% provide(:title, "Campground - Trails") %>
+<h2>Search Trails</h2>
+
+<%= render layout: 'shared/select_trail' do %>
+	<%= link_to "Show trail", "#", remote: true, id: "show_trail_button" %>
+<% end %>

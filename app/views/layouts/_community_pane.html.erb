@@ -1,10 +1,7 @@
 <div id="user_community">	
 	<% div_name = div_for_side_panes %>
 	<%= content_tag(:div, class: div_name) do %>
-		<%= link_to "Updates", "#", class: "title_text" %>
-	<% end %>
-	<%= content_tag(:div, class: div_name) do %>
-		<%= link_to "Trails", "#", class: "title_text" %>
+		<%= link_to "Trails", common_trails_path, class: "title_text" %>
 	<% end %>
 	<%= content_tag(:div, class: div_name) do %>
 		<%= link_to "Bazaar", "#", class: "title_text" %>
@@ -12,9 +9,4 @@
 	<%= content_tag(:div, class: div_name) do %>
 		<%= link_to "Company", "#", class: "title_text" %>
 	<% end %>
-	<!-- <div class="title_board">
-		<div class="title_text">
-			Bazaar
-		</div>
-	</div> -->
 </div>

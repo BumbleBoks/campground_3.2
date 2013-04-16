@@ -1,0 +1,9 @@
+<% if current_user.trails.include?(trail) %>
+	<%= button_to "Remove from favorites", { controller: 'corner/favorites', 
+		action: 'remove_trail', favorite_trail_id: trail.id }, 
+		id: "other_links_button" %>
+<% else %>
+	<%= button_to "Add to favorites", { controller: 'corner/favorites', 
+		action: 'add_trail', favorite_trail_id: trail.id }, 
+		id: "other_links_button" %>		  
+<% end %>

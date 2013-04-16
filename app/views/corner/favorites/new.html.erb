@@ -7,7 +7,7 @@
 <div id="favorite_activities">
 	<% Common::Activity.all.each do |activity| %>
 		<%= check_box_tag "user[activity_ids][]", activity.id, 
-			@current_user.activity_ids.include?(activity.id), id: dom_id(activity) %>
+			current_user.activity_ids.include?(activity.id), id: dom_id(activity) %>
 		<%= label_tag dom_id(activity), activity.name, id: "nested_form" %>				
 	<% end %>			
 </div>

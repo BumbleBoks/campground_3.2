@@ -2,8 +2,8 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @updates = []
-      if @current_user.trails.any?
-        @updates = Community::Update.where(trail_id: @current_user.trail_ids)
+      if current_user.trails.any?
+        @updates = Community::Update.where(trail_id: current_user.trail_ids)
       end
     else
       if params.has_key?(:trail_id)

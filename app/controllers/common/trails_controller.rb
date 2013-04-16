@@ -1,5 +1,8 @@
 class Common::TrailsController < ApplicationController
-  before_filter :authorize_admin, except: [:show]
+  before_filter :authorize_admin, except: [:index, :show]
+  
+  def index
+  end
   
   def show
     @trail = Common::Trail.find_by_id(params[:id])
