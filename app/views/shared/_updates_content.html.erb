@@ -1,7 +1,7 @@
 <% unless trail.nil? %>
 <h4>Updates for <%= trail.name %></h4>
-	<% if @updates.any? %>
-		<%= render partial: 'shared/update', collection: @updates %>
+	<% if trail.updates.any? %>
+		<%= render_update_partial(trail.updates, false) %>
 	<% else %>
 		<span class="update_content">
 			No updates found

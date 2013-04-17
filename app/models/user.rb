@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
+            length: { minimum: 1, maximum: 50 },
             uniqueness: { case_sensitive: false },
             format: { with: VALID_LOGIN_REGEX }
   validates :name, presence: true,

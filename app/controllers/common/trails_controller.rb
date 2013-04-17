@@ -9,6 +9,10 @@ class Common::TrailsController < ApplicationController
     if logged_in?
       @update = current_user.updates.build
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def new

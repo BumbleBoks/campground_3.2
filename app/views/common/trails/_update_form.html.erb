@@ -1,4 +1,4 @@
-<%= form_for @update do |f| -%>
+<%= form_for @update, remote: true do |f| -%>
 	<%# currently this doesn't do anything because of redirect call %>
 	<%= render 'shared/error_messages', object: f.object %>
 	

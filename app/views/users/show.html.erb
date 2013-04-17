@@ -15,5 +15,5 @@
 </div>
 <div id="user_profile_updates">
 	<h4>Updates by <%= @user.name %></h4>
-	<%= render partial: 'shared/update', collection: @user.updates %>
+	<%= render_update_partial(@user.updates) %>
 </div>

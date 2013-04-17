@@ -3,7 +3,7 @@
 	<h2>My campsite </h2>
 	
 	<% if @updates.any? %>	
-		<%= render partial: 'shared/update', collection: @updates %>	
+		<%= render_update_partial(@updates, true) %>
 	<% else %>
 		<span class="update_content">
 			No updates for favorite trails
