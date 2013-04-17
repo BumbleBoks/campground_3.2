@@ -14,7 +14,9 @@
 	<h4>Trails</h4>
 	<ul>
 	<% current_user.trails.each do |trail| %>
-		<li><%= trail.name %>, <%= trail.state.name %></li>
+		<li>
+			<%= link_to "#{trail.name}, #{trail.state.name}", common_trail_path(trail) %>
+		</li>
 	<% end %>
 	</ul>	
 </div>	
