@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "UserPages" do
+  after(:all) { clear_all_databases } 
   
   subject { page }
   
@@ -54,6 +55,22 @@ describe "UserPages" do
 
       it "should create a new user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+      
+      describe "should send an email to the new user" do
+        before { click_button submit }
+        let(:welcome_email) { ActionMailer::Base.deliveries.last }
+        
+        it "check email" do          
+          html_email_message = "<p>Thank you for joining campground, Example Foo.<\/p>"
+          text_email_message = "Thank you for joining campground, Example Foo."
+
+          expect(welcome_email.to).to eq(["examplefoo@example.com"])
+          expect(welcome_email.subject).to eq("Welcome to Campground")
+          expect(welcome_email.encoded).to include(html_email_message)
+          expect(welcome_email.encoded).to include(text_email_message)     
+        end
+        
       end
       
       describe "and login to home page" do

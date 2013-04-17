@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.welcome_message(@user).deliver
       log_in @user
       redirect_to root_path
     else

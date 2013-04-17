@@ -62,3 +62,8 @@ Common::Activity.delete_all
 Common::Activity.create!(name: "Cycling")
 Common::Activity.create!(name: "Hiking")
 Common::Activity.create!(name: "Cross country skiing")
+
+# Common::Trail.delete_all
+# Common::Trail.create!(name: "Capitol City Trail", length: 10, activity_ids: [1, 2], state_id: 49)
+# Common::Trail.create!(name: "Military Ridge Trail", length: 40, activity_ids: [1, 2], state_id: 49)
+# Common::Trail.create!(name: "Cannonball Path", length: 10, activity_ids: [1, 2, 3], state_id: 49)

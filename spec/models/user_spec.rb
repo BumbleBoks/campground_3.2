@@ -15,12 +15,15 @@
 require "spec_helper"
 
 describe User do
+  after(:all) { clear_all_databases } 
+
   before { @user = User.new(login_id: "example", name: "The Example", email: "example@example.com",
       password: "1password", password_confirmation: "1password") }      
   subject { @user }
   
   it { should respond_to(:login_id) }
   it { should respond_to(:name) }
+  it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
@@ -188,6 +191,11 @@ describe User do
     end    
   end
   
+  describe "with a very long login_id" do
+    before { @user.login_id = 'w'*51 }
+    it { should_not be_valid }
+  end
+
   describe "with a very long name" do
     before { @user.name = 'z'*51 }
     it { should_not be_valid }

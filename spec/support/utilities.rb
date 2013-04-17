@@ -65,3 +65,10 @@ def log_in(user)
   click_button "Log in"        
   # session[:user_id] = user.id
 end
+
+def clear_all_databases
+  Community::Update.delete_all
+  Corner::FavoriteTrail.delete_all
+  Corner::FavoriteActivity.delete_all
+  User.delete_all
+end
