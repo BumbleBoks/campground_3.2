@@ -21,18 +21,18 @@ $photo_width: 150px;
 	margin-top: 100px;
 }
 
-#change_password_button {
+.change_password_button {
 	@include body_button_styling(coral, oldlace);
 	margin: 20px;
 	position: relative;
 	left: 100px;
-	
 	a {
 		color:oldlace;
 		position: relative;
 		top: 5px;		
 	}
 }
+
 
 
 

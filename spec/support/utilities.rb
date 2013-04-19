@@ -67,8 +67,5 @@ def log_in(user)
 end
 
 def clear_all_databases
-  Community::Update.delete_all
-  Corner::FavoriteTrail.delete_all
-  Corner::FavoriteActivity.delete_all
-  User.delete_all
+  [Community::Update, Corner::FavoriteTrail, Corner::FavoriteActivity, User].each(&:delete_all)
 end

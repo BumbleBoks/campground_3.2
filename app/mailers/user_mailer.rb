@@ -8,4 +8,12 @@ class UserMailer < ActionMailer::Base
     to_email = "#{user.name} <#{user.email}>"
     mail to: to_email, subject: subject
   end
+  
+  def reset_password_message(user, request)
+    @user = user
+    @reset_url = edit_site_user_request_url(request.token, only_path: false)
+    subject = "Your Campground Account"
+    to_email = "#{@user.name} <#{@user.email}>"
+    mail to: to_email, subject: subject
+  end
 end

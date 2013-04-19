@@ -26,7 +26,19 @@ Campground::Application.routes.draw do
     post 'favorites/add_trail'
     post 'favorites/remove_trail'
   end
+  
+  namespace :site do
+    resources :user_requests, only: [:create]
+  end
+  get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"
+  post "site/user_requests/:token", to: 'site/user_requests#process_request'
 
+  # post "requests/create_password"
+  # get "reset_password/:token", to: 'requests#reset_password', as: 'reset_password'
+  # post "update_password/:token", to: 'requests#update_password', as: 'update_password'
+  # post "requests/create_join"
+  # get "requests/confirm_join/:token", to: 'requests#confirm_join'
+  # post "requests/update_join/:token", to: 'request#update_join'    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
