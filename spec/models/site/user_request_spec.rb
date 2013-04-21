@@ -62,4 +62,13 @@ describe Site::UserRequest do
     end
 
   end
+  
+  describe "generate_new function should generate new token" do
+    before { @new_request = Site::UserRequest.generate_new("foo@example.com", "password") }
+    
+    it "should be valid" do
+      @new_request.should be_valid
+    end
+    
+  end
 end

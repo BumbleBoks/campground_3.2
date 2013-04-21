@@ -14,6 +14,7 @@
 
 class User < ActiveRecord::Base
   attr_accessible :login_id, :name, :email, :password, :password_confirmation, :current_password
+  
   has_secure_password
   
   has_many :updates, 
@@ -29,6 +30,9 @@ class User < ActiveRecord::Base
            foreign_key: "user_id", dependent: :destroy
   has_many :trails, class_name: "Common::Trail", through: :favorite_trails
   
+  accepts_nested_attributes_for :trails, allow_destroy: true, reject_if: :all_blank 
+  accepts_nested_attributes_for :activities, allow_destroy: true, reject_if: :all_blank   
+
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
             length: { minimum: 1, maximum: 50 },

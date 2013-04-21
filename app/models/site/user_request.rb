@@ -18,10 +18,22 @@ class Site::UserRequest < ActiveRecord::Base
   
   # class methods
   def self.generate_new(email, request_type)
-    user_request = Site::UserRequest.new
+    user_request = new
     user_request.email = email
-    user_request.token = Digest::SHA2.hexdigest(rand.to_s)
+    user_request.token = generate_unique_token
     user_request.request_type = request_type
     user_request
   end
+  
+  private
+  
+  def self.generate_unique_token
+    unique_token = false
+    while !unique_token
+      token = Digest::SHA2.hexdigest(rand.to_s)
+      unique_token = true if Site::UserRequest.find_by_token(token).nil?            
+    end    
+    token
+  end
+  
 end
