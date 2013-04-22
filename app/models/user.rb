@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
            foreign_key: "user_id", dependent: :destroy
   has_many :trails, class_name: "Common::Trail", through: :favorite_trails
   
-  accepts_nested_attributes_for :trails, allow_destroy: true, reject_if: :all_blank 
-  accepts_nested_attributes_for :activities, allow_destroy: true, reject_if: :all_blank   
+  accepts_nested_attributes_for :trails, reject_if: :all_blank 
+  accepts_nested_attributes_for :activities, reject_if: :all_blank   
 
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
@@ -85,14 +85,14 @@ class User < ActiveRecord::Base
     end
 
     unless self.errors.any?
-      self.assign_partial_attributes(user_params)
+      self.set_partial_attributes(user_params)
     end
 
     !self.errors.any?
   end
 
 
-  def assign_partial_attributes(user_params)
+  def set_partial_attributes(user_params)
     if self.validate_partial_attributes(user_params)    
       user_params.keys.each do |key|
         self.update_attribute(key, user_params[key])        

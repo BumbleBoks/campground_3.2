@@ -45,7 +45,7 @@ class Site::UserRequestsController < ApplicationController
         user_attributes = { password: params[:password], 
                             password_confirmation: params[:password_confirmation] }
         
-        if @user.assign_partial_attributes(user_attributes)
+        if @user.set_partial_attributes(user_attributes)
           log_in @user
           flash[:success] = "Password was reset."
           redirect_to root_path

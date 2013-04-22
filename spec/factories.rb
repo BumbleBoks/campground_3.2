@@ -1,4 +1,14 @@
 FactoryGirl.define do
+  sequence(:random_string) do |n|
+    alphabets = "abcdefghijklmnopqrstuvwxyz"
+    len = rand(1..10)
+    random_string = String.new
+    len.times do 
+      random_string << alphabets[rand(0..25)]
+    end
+    random_string    
+  end
+
   factory :user, aliases: [:author] do
     sequence(:login_id) { |n| "foo#{n}" }    
     email { "#{login_id}@example.com" }
@@ -32,5 +42,10 @@ FactoryGirl.define do
     author
     trail
   end
+  
+  factory :tag, class: Site::Tag do
+    name { generate(:random_string) }
+  end
+  
   
 end    
