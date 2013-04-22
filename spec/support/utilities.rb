@@ -66,6 +66,15 @@ def log_in(user)
   # session[:user_id] = user.id
 end
 
+# clears all tables besides the ones that are seeded
 def clear_all_databases
-  [Community::Update, Corner::FavoriteTrail, Corner::FavoriteActivity, Site::Tag, User].each(&:delete_all)
+  excluded_tables = ["schema_migrations", "common_states", "common_activities"]
+  connection = ActiveRecord::Base.connection
+  table_names = connection.tables.dup
+  table_names.delete_if { |table_name| excluded_tables.include?(table_name) }
+  
+  table_names.each do |table_name|
+    sql_command = "DELETE FROM #{table_name};"
+    connection.execute sql_command
+  end
 end

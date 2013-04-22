@@ -6,6 +6,7 @@ describe Site::Tag do
   subject { @tag }
   
   it { should respond_to(:name) }
+  it { should respond_to(:tag_associations) }
   it { should be_valid }
   
   describe "without name" do
@@ -29,6 +30,11 @@ describe Site::Tag do
       before { @tag.name = name }
       it { should_not be_valid }
     end
+  end
+  
+  describe "with a long name" do
+    before { @tag.name = "t"*21 }
+    it { should_not be_valid }
   end
   
 end
