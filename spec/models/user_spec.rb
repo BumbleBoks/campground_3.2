@@ -30,6 +30,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:updates) }
+  it { should respond_to(:logs) }
   it { should respond_to(:favorite_activities) }
   it { should respond_to(:activities) }
   it { should respond_to(:favorite_trails) }
@@ -239,6 +240,21 @@ describe User do
       updates.should_not be_empty
       updates.each do |update|
         Community::Update.find_by_id(update.id).should be_nil
+      end
+    end
+  end
+
+  describe "log associations" do
+    before do
+      @user.save
+      FactoryGirl.create(:log, user: @user) 
+    end
+    it "should destroy log associations for the user" do
+      logs = @user.logs.dup
+      @user.destroy
+      logs.should_not be_empty
+      logs.each do |log|
+        Corner::Log.find_by_id(log.id).should be_nil
       end
     end
   end
