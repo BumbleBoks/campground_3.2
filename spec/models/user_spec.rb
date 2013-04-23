@@ -55,28 +55,15 @@ describe User do
     end
   end
   
-  describe "without login_id" do
-    before { @user.login_id = ' ' }    
-    it { should_not be_valid }
-  end
-  
-  describe "without name" do
-    before { @user.name = ' ' }
-    it { should_not be_valid }
-  end
-  
-  describe "without email" do
-    before { @user.email = ' ' }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:login_id, ' ') }
+  it { should be_invalid_with_attribute_value(:name, ' ') }
+  it { should be_invalid_with_attribute_value(:email, ' ') }
+  it { should be_invalid_with_attribute_value(:password_confirmation, nil) }
+  it { should be_invalid_with_attribute_value(:login_id, 'w'*51) }
+  it { should be_invalid_with_attribute_value(:name, 'z'*51) }
   
   describe "without password" do
     before { @user.password = @user.password_confirmation = ' ' }
-    it { should_not be_valid }
-  end
-  
-  describe "without password confirmation" do
-    before { @user.password_confirmation = nil }
     it { should_not be_valid }
   end
   
@@ -131,8 +118,7 @@ describe User do
     logins = %w[x.y.yz0y Z@y987 #987 ab%%c $bfdm]
     
     logins.each do |login|
-      before { @user.login_id = login }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:login_id, login) }
     end   
   end
 
@@ -149,8 +135,7 @@ describe User do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo. 
         foo@bar_baz.com foo@bar+baz.com]
     addresses.each do |address|
-      before { @user.email = address }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:email, address) }
     end      
   end
 
@@ -190,16 +175,6 @@ describe User do
       @user.save
       @user.reload.email.should == mixed_case_email.downcase
     end    
-  end
-  
-  describe "with a very long login_id" do
-    before { @user.login_id = 'w'*51 }
-    it { should_not be_valid }
-  end
-
-  describe "with a very long name" do
-    before { @user.name = 'z'*51 }
-    it { should_not be_valid }
   end
   
   describe "with a very short password" do

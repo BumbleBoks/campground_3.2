@@ -30,33 +30,6 @@ shared_examples_for "home page when not logged in" do
   it { should have_selector('h2', text: "Welcome to Campground") }       
 end
 
-RSpec::Matchers.define :have_page_title do |title|
-  match do |page|
-    html_element_raw = page.html.match(/<title>(.*)<\/title>/).to_s  
-    html_element_without_title = html_element_raw.gsub(/<(\/)*(title)>/, '')
-    html_text = html_element_without_title.gsub(/(&#x27;)/, "'")
-    # print html_text
-    html_text.should eq(title) 
-  end
-end
-
-RSpec::Matchers.define :have_error_message do |message|
-  match do |page|
-    page.should have_selector('div.alert.alert-error', text: message)
-  end
-end
-
-RSpec::Matchers.define :have_field_with_name_and_value do |name, value|
-  match do |page|
-    find_field(name).value.should eq(value)
-  end
-end
-
-RSpec::Matchers.define :have_optgroup_with_label_and_text do |label, text|
-  match do |page|
-    page.should have_selector("optgroup[label='#{label}']", text: text)
-  end
-end
 
 def log_in(user)
   visit login_path

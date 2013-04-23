@@ -25,20 +25,10 @@ describe Community::Update do
   it { should respond_to(:author) }
   it { should respond_to(:trail) }
   
-  describe "without content" do
-    before { @update.content = "" }
-    it { should_not be_valid }
-  end
-  
-  describe "without trail_id" do
-    before { @update.trail_id = "" }
-    it { should_not be_valid }
-  end
-  
-  describe "without author_id" do
-    before { @update.author_id = "" }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:content, nil) }
+  it { should be_invalid_with_attribute_value(:trail_id, nil) }
+  it { should be_invalid_with_attribute_value(:author_id, nil) }
+  it { should be_invalid_with_attribute_value(:content, "a"*501) }
   
   describe "accessible attributes" do
     it "should not allow access to author_id" do
@@ -46,10 +36,5 @@ describe Community::Update do
         Community::Update.new(content: "New Update!", author_id: user.id, trail_id: trail.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
-  end
-  
-  describe "very long content" do
-    before { @update.content = "a"*501 }
-    it { should_not be_valid }
   end
 end

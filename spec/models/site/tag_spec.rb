@@ -9,10 +9,7 @@ describe Site::Tag do
   it { should respond_to(:tag_associations) }
   it { should be_valid }
   
-  describe "without name" do
-    before { @tag.name = "" }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:name, nil) }
   
   describe "with duplicate name" do
     before do
@@ -24,11 +21,9 @@ describe Site::Tag do
   end
   
   describe "with invalid names" do
-    invalid_names = ["abc765", "$a#b?3c", "%abc", "b@ca<}", "!/1*abc", "a bc"]
-    
+    invalid_names = ["abc765", "$a#b?3c", "%abc", "b@ca<}", "!/1*abc", "a bc"]    
     invalid_names.each do |name|
-      before { @tag.name = name }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:name, name) }
     end
   end
   

@@ -27,20 +27,9 @@ describe Site::UserRequest do
   it { should respond_to(:request_type) }
   it { should be_valid }
 
-  describe "without email" do
-    before { @request.email = '' }
-    it { should_not be_valid }
-  end
-
-  describe "without token" do
-    before { @request.token = '' }
-    it { should_not be_valid }
-  end
-
-  describe "without type" do
-    before { @request.request_type = '' }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:email, "") }
+  it { should be_invalid_with_attribute_value(:token, "") }
+  it { should be_invalid_with_attribute_value(:request_type, "") }
 
   describe "accessible attributes" do
     it "should not allow access to token" do

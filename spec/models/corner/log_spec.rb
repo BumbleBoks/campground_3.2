@@ -19,21 +19,12 @@ describe Corner::Log do
   
   it { should be_valid }
   
-  describe "without user_id" do
-    before { @log.user_id = nil }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:user_id, nil) }
+  it { should be_invalid_with_attribute_value(:title, nil) }
+  it { should be_invalid_with_attribute_value(:content, nil) }
+  it { should be_invalid_with_attribute_value(:title, "d"*101) }
+  it { should be_invalid_with_attribute_value(:content, "e"*1001) }
   
-  describe "without title" do
-    before { @log.title = "" }
-    it { should_not be_valid }
-  end
-  
-  describe "without user_id" do
-    before { @log.content = "" }
-    it { should_not be_valid }
-  end
-    
   describe "saving without log_date should set default log_date" do
     before do
       @log.log_date = nil

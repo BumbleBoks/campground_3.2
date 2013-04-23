@@ -23,15 +23,8 @@ describe Corner::FavoriteActivity do
   it { should respond_to(:user) }
   it { should respond_to(:activity) }
   
-  describe "when user_id is missing" do
-    before { @favorite_activity.user_id = nil }
-    it { should_not be_valid }
-  end
-  
-  describe "when activity_id is missing" do
-    before { @favorite_activity.activity_id = nil }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:user_id, nil) }
+  it { should be_invalid_with_attribute_value(:activity_id, nil) }
   
   describe "accessible attributes" do
     it "should not allow access to user_id" do
