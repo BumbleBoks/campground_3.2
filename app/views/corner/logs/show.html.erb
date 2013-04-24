@@ -1,0 +1,12 @@
+<% provide(:title, "Campground - #{current_user.name}'s Diary") %>
+
+<p>
+	<%= @log.log_date.to_formatted_s(:calendar_date) %>
+</p>
+<p>
+  <b><%= @log.title %></b>
+</p>
+
+<p>
+  <%= @log.content %>
+</p>

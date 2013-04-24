@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: site_tags
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Site::Tag < ActiveRecord::Base
   attr_accessible :name
   
@@ -5,7 +15,7 @@ class Site::Tag < ActiveRecord::Base
       dependent: :destroy
   
   validates :name, presence: true,                
-            format: { with: /^[\w]+$/ },
+            format: { with: /^[A-Za-z]+$/ },
             length: { maximum: 20 },
             uniqueness: { case_sensitive: false }
   

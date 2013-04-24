@@ -9,12 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require_tree .
+ *= require ../../../lib/assets/stylesheets/date_picker
  */
  
-@import "layout.css.scss";
+/*@import "layout.css.scss";
 @import "forms.css.scss";
 @import "static_pages.css.scss";
 @import "community/updates.css.scss";
 @import "corner/favorites.css.scss";
 @import "users.css.scss";
 @import "sessions.css.scss";
+@import "../../../lib/assets/stylesheets/date_picker.css"*/

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: corner_logs
+#
+#  id          :integer          not null, primary key
+#  user_id     :integer          not null
+#  title       :string(100)      not null
+#  content     :text             not null
+#  activity_id :integer
+#  log_date    :date             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Corner::Log < ActiveRecord::Base
   attr_accessible :activity_id, :content, :log_date, :title
   

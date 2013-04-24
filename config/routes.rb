@@ -25,6 +25,8 @@ Campground::Application.routes.draw do
     resources :favorites, only: [:create] 
     post 'favorites/add_trail'
     post 'favorites/remove_trail'
+    
+    resources :logs, only: [:show, :new, :create]
   end
   
   namespace :site do
