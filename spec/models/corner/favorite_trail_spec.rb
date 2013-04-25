@@ -23,15 +23,8 @@ describe Corner::FavoriteTrail do
   it { should respond_to(:user) }
   it { should respond_to(:trail) }
   
-  describe "when user_id is missing" do
-    before { @favorite_trail.user_id = nil }
-    it { should_not be_valid }
-  end
-  
-  describe "when trail_id is missing" do
-    before { @favorite_trail.trail_id = nil }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:user_id, nil) }
+  it { should be_invalid_with_attribute_value(:trail_id, nil) }
   
   describe "accessible attributes" do
     it "should not allow access to user_id" do

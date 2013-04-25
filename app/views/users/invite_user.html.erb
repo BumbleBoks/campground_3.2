@@ -1,0 +1,17 @@
+<%= provide(:title, "Join Campground") %>
+<h2>Get An Invite</h2>
+
+<div class='project_form'>
+	<%=  form_tag site_user_requests_path do -%>
+		<%= hidden_field_tag "user_request", "get_invite" %>
+		<%= hidden_field_tag "back_path", request.url %>
+		
+		<div>
+			<%= label_tag :invite_email, "Email" %>
+			<%= text_field_tag :invite_email  %>
+		</div>
+		
+		<%= submit_tag "Send me an invite" %>
+
+	<% end -%>	
+</div>

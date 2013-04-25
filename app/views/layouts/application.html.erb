@@ -13,6 +13,9 @@
 <div id="user_dynamic">
 	<%= render partial: 'layouts/header' %>
 	<div id="user_display">
+		<% flash.each do |key, value| %>
+			<%= content_tag(:div, value, class: "flash_#{key}") %>
+		<% end %>
 		<%= yield %>		
 	</div>
 	<%= render partial: 'layouts/footer' %>

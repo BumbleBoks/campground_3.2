@@ -28,7 +28,7 @@ describe "Favorites pages" do
       it { should have_selector('h2', text: "My Favorites") } 
       it { should have_link('Change favorites', favorites_new_path) }
       it { should have_selector('h4', text: "Trails") }
-      it { should have_content("#{trail_one.name}, #{trail_one.state.name}") } 
+      it { should have_link("#{trail_one.name}, #{trail_one.state.name}") } 
       it { should_not have_content("#{trail_two.name}, #{trail_two.state.name}") }
       it { should have_selector('h4', text: "Activities") }
       it { should have_content(activity_one.name)} 

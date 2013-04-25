@@ -21,10 +21,7 @@ describe Common::Activity do
   it { should respond_to(:users) }
   it { should be_valid }
   
-  describe "without name" do
-    before { @activity.name = '' }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:name, '') }
   
   describe "with a duplicate name" do
     before do
@@ -38,8 +35,7 @@ describe Common::Activity do
   describe "with invalid name format" do
     names = %w[a<43 h.890]    
     names.each do |name|
-      before { @activity.name = name }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:name, name) }
     end
   end
   

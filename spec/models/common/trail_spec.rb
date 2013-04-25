@@ -30,20 +30,9 @@ describe Common::Trail do
   it { should respond_to(:users) }
   it { should be_valid }
   
-  describe "without name" do
-    before { @trail.name = '' }
-    it { should_not be_valid }
-  end
-  
-  describe "with a non-numerical length" do
-    before { @trail.length = 'abc' }
-    it { should_not be_valid }
-  end
-  
-  describe "without a state" do
-    before { @trail.state_id = nil }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:name, '') }
+  it { should be_invalid_with_attribute_value(:length, 'abc') }
+  it { should be_invalid_with_attribute_value(:state_id, nil) }
   
   describe "same trail name with same state" do
     before do

@@ -24,15 +24,8 @@ describe Common::ActivityAssociation do
   it { should respond_to(:trail) }
   it { should respond_to(:activity) }
   
-  describe "when trail id is not present" do
-    before { activity_association.trail_id = nil }
-    it { should_not be_valid }
-  end
-  
-  describe "when activity id is not present" do
-    before { activity_association.activity_id = nil }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:trail_id, nil) }
+  it { should be_invalid_with_attribute_value(:activity_id, nil) }
   
   describe "accessible attributes" do
     it "should not allow access to trail_id" do

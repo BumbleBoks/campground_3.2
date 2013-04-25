@@ -14,6 +14,7 @@
 
 class User < ActiveRecord::Base
   attr_accessible :login_id, :name, :email, :password, :password_confirmation, :current_password
+  
   has_secure_password
   
   has_many :updates, 
@@ -21,6 +22,11 @@ class User < ActiveRecord::Base
            foreign_key: "author_id",
            dependent: :destroy
   
+  has_many :logs, 
+           class_name: "Corner::Log", 
+           foreign_key: "user_id", 
+           dependent: :destroy
+           
   has_many :favorite_activities, class_name: "Corner::FavoriteActivity", 
            foreign_key: "user_id", dependent: :destroy
   has_many :activities, class_name: "Common::Activity", through: :favorite_activities
@@ -29,6 +35,9 @@ class User < ActiveRecord::Base
            foreign_key: "user_id", dependent: :destroy
   has_many :trails, class_name: "Common::Trail", through: :favorite_trails
   
+  accepts_nested_attributes_for :trails, reject_if: :all_blank 
+  accepts_nested_attributes_for :activities, reject_if: :all_blank   
+
   VALID_LOGIN_REGEX = /^[A-Za-z\d_]+$/
   validates :login_id, presence: true,
             length: { minimum: 1, maximum: 50 },
@@ -81,14 +90,14 @@ class User < ActiveRecord::Base
     end
 
     unless self.errors.any?
-      self.assign_partial_attributes(user_params)
+      self.set_partial_attributes(user_params)
     end
 
     !self.errors.any?
   end
 
 
-  def assign_partial_attributes(user_params)
+  def set_partial_attributes(user_params)
     if self.validate_partial_attributes(user_params)    
       user_params.keys.each do |key|
         self.update_attribute(key, user_params[key])        

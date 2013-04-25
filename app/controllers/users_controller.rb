@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :guest_user, :only => [:new, :create]
+  before_filter :guest_user, :only => [:new, :create, :invite_user]
   before_filter :authorize_user, :only => [:show, :edit, :update]
   before_filter :account_owner, :only => [:edit, :update]
   
@@ -7,13 +7,19 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
   end
 
+  def invite_user    
+  end
+  
   def new
     @user = User.new
   end
   
   def create
+    logger.debug params[:user][:email]  
     @user = User.new(params[:user])
+    logger.debug @user.email
     if @user.save
+      UserMailer.welcome_message(@user).deliver
       log_in @user
       redirect_to root_path
     else

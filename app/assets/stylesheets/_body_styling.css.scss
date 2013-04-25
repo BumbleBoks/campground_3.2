@@ -14,3 +14,14 @@
 	box-shadow: 2px 2px 2px olive;
 }
 
+@mixin flash_message_styling($background_color, $color) {
+	position: relative;
+	left: -10px;
+	width: 100%;
+	border-radius: 5px;
+	border: 2px solid $color;
+	padding: 8px;
+	margin: 0;
+	background-color: $background_color;
+	color: $color;
+}

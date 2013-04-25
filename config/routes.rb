@@ -7,7 +7,7 @@ Campground::Application.routes.draw do
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
     
-  get 'join', to: 'users#new', as: 'join'
+  # get 'join', to: 'users#new', as: 'join'
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   
@@ -25,8 +25,23 @@ Campground::Application.routes.draw do
     resources :favorites, only: [:create] 
     post 'favorites/add_trail'
     post 'favorites/remove_trail'
+    
+    resources :logs, only: [:show, :new, :create]
   end
+  
+  get 'invite_user', to: 'users#invite_user', as: 'invite_user'
+  namespace :site do
+    resources :user_requests, only: [:create]
+  end
+  get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"
+  post "site/user_requests/:token", to: 'site/user_requests#process_request'
 
+  # post "requests/create_password"
+  # get "reset_password/:token", to: 'requests#reset_password', as: 'reset_password'
+  # post "update_password/:token", to: 'requests#update_password', as: 'update_password'
+  # post "requests/create_join"
+  # get "requests/confirm_join/:token", to: 'requests#confirm_join'
+  # post "requests/update_join/:token", to: 'request#update_join'    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409143833) do
+ActiveRecord::Schema.define(:version => 20130422082407) do
 
   create_table "common_activities", :force => true do |t|
     t.string   "name",       :null => false
@@ -85,6 +85,52 @@ ActiveRecord::Schema.define(:version => 20130409143833) do
   add_index "corner_favorite_trails", ["trail_id"], :name => "index_corner_favorite_trails_on_trail_id"
   add_index "corner_favorite_trails", ["user_id", "trail_id"], :name => "index_corner_favorite_trails_on_user_id_and_trail_id", :unique => true
   add_index "corner_favorite_trails", ["user_id"], :name => "index_corner_favorite_trails_on_user_id"
+
+  create_table "corner_logs", :force => true do |t|
+    t.integer  "user_id",                    :null => false
+    t.string   "title",       :limit => 100, :null => false
+    t.text     "content",                    :null => false
+    t.integer  "activity_id"
+    t.date     "log_date",                   :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "corner_logs", ["log_date"], :name => "index_corner_logs_on_log_date"
+  add_index "corner_logs", ["user_id", "activity_id"], :name => "index_corner_logs_on_user_id_and_activity_id"
+  add_index "corner_logs", ["user_id"], :name => "index_corner_logs_on_user_id"
+
+  create_table "site_tag_associations", :force => true do |t|
+    t.integer  "tag_id",        :null => false
+    t.integer  "associated_id", :null => false
+    t.string   "type",          :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "site_tag_associations", ["associated_id", "type"], :name => "by_associated_item"
+  add_index "site_tag_associations", ["tag_id", "associated_id", "type"], :name => "by_tag_in_associated_item", :unique => true
+  add_index "site_tag_associations", ["tag_id"], :name => "index_site_tag_associations_on_tag_id"
+
+  create_table "site_tags", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "site_tags", ["name"], :name => "index_site_tags_on_name", :unique => true
+
+  create_table "site_user_requests", :force => true do |t|
+    t.string   "email",        :null => false
+    t.string   "token",        :null => false
+    t.string   "request_type", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "site_user_requests", ["created_at"], :name => "index_site_user_requests_on_created_at"
+  add_index "site_user_requests", ["email"], :name => "index_site_user_requests_on_email"
+  add_index "site_user_requests", ["token"], :name => "index_site_user_requests_on_token"
 
   create_table "users", :force => true do |t|
     t.string   "login_id",        :limit => 50,                    :null => false
