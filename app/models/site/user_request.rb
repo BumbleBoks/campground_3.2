@@ -11,11 +11,13 @@
 #
 
 class Site::UserRequest < ActiveRecord::Base
-
-  validates :email,  presence: true
+  VALID_EMAIL_REGEX = /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validates :email,  presence: true,
+            format: { with: VALID_EMAIL_REGEX }
   validates :token,  presence: true
   validates :request_type,  presence: true
   
+  protected
   # class methods
   def self.generate_new(email, request_type)
     user_request = new

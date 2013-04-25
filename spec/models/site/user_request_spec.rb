@@ -31,6 +31,23 @@ describe Site::UserRequest do
   it { should be_invalid_with_attribute_value(:token, "") }
   it { should be_invalid_with_attribute_value(:request_type, "") }
 
+  describe "with valid email format" do
+    addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn
+      user2@foo.com]
+    addresses.each do |address|
+      before { @request.email = address }
+      it { should be_valid }
+    end
+  end
+
+  describe "with invalid email format" do
+    addresses = %w[user@foo,com user_at_foo.org example.user@foo. 
+        foo@bar_baz.com foo@bar+baz.com]
+    addresses.each do |address|
+      it { should be_invalid_with_attribute_value(:email, address) }
+    end      
+  end
+
   describe "accessible attributes" do
     it "should not allow access to token" do
       expect do

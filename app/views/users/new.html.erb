@@ -17,8 +17,9 @@
 		</div>
 
 		<div>
+			<%= f.hidden_field :email %>
 			<%= f.label :email, "Email" %>
-			<%= f.text_field :email  %>
+			<%= f.text_field :email, disabled: true %>
 		</div>
 
 		<div>

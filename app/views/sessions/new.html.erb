@@ -25,6 +25,7 @@
 <div id ="forgot_password">
 <%= form_tag site_user_requests_path do %>
 	<%= hidden_field_tag "user_request", "reset_password" %>
+	<%= hidden_field_tag "back_path", request.url %>
 	<%= hidden_field_tag "user_login_id" %>	
 	<%= submit_tag "Forgot password?", class: "change_password_button" %>			
 <% end %>

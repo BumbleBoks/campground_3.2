@@ -7,7 +7,7 @@ Campground::Application.routes.draw do
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
     
-  get 'join', to: 'users#new', as: 'join'
+  # get 'join', to: 'users#new', as: 'join'
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   
@@ -29,6 +29,7 @@ Campground::Application.routes.draw do
     resources :logs, only: [:show, :new, :create]
   end
   
+  get 'invite_user', to: 'users#invite_user', as: 'invite_user'
   namespace :site do
     resources :user_requests, only: [:create]
   end

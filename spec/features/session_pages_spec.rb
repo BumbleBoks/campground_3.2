@@ -48,15 +48,15 @@ describe "SessionPages" do
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_link('Log out', href: logout_path) }
       it { should have_link('Profile', href: user_path(user)) }
-      it { should_not have_link('Join', href: join_path) }
-      it { should_not have_link('Log in', href: login_path) }
+      it { should_not have_link('Join') }
+      it { should_not have_link('Log in') }
       
       describe "and then log out" do
         before { click_link 'Log out' }
         
         it { should have_page_title("Campground") }
         it { should have_link('Log in', href: login_path) }
-        it { should have_link('Join', href: join_path) }
+        it { should have_link('Join', href: invite_user_path) }
         it { should_not have_link('Log out') }
         it { should_not have_link('Profile') }
         

@@ -5,7 +5,7 @@ shared_examples_for "all pages without logging in" do
   it { should have_css("#user_dynamic") }
   it { should have_link("About", href: about_path) }
   it { should have_link("Contact", href: contact_path) }    
-  it { should have_link("Join", href: join_path) }
+  it { should have_link("Join", href: invite_user_path) }
   it { should have_link("Log in", href: login_path) }
   it { should_not have_link("Profile") }
   it { should_not have_link("Log out") }

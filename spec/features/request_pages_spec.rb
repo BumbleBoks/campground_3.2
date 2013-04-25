@@ -4,7 +4,7 @@ describe "Request pages" do
   let (:user) { FactoryGirl.create(:user) }
   subject { page }
 
-  describe "request page for password change"
+  describe "request page for password change" do
     before do
       @request = Site::UserRequest.generate_new(user.email, "password")
       @request.save
@@ -48,7 +48,8 @@ describe "Request pages" do
         it { should have_page_title("Campground - #{user.name}'s Campsite") }
         it { should have_selector('h2', text: "My campsite") }
         it { should have_content('Password was reset') }      
-
       end
-    end  
+    end # with valid token
+  end # request page for password change 
+  
 end

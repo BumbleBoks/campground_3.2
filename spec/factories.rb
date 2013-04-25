@@ -53,5 +53,4 @@ FactoryGirl.define do
     name { generate(:random_string) }
   end
   
-  
 end    
