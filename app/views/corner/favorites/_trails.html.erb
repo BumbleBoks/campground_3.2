@@ -1,5 +1,6 @@
 <div id="favorite_trails">
 	<h4>Trails</h4>
+	<%= hidden_field_tag "user[trail_ids][]" %>
 	<ul>
 		<% current_user.trails.each do |trail| %>
 			<li>

@@ -15,18 +15,22 @@
 require "spec_helper"
 
 describe User do
+  after(:all) { clear_all_databases } 
+
   before { @user = User.new(login_id: "example", name: "The Example", email: "example@example.com",
       password: "1password", password_confirmation: "1password") }      
   subject { @user }
   
   it { should respond_to(:login_id) }
   it { should respond_to(:name) }
+  it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:updates) }
+  it { should respond_to(:logs) }
   it { should respond_to(:favorite_activities) }
   it { should respond_to(:activities) }
   it { should respond_to(:favorite_trails) }
@@ -51,28 +55,15 @@ describe User do
     end
   end
   
-  describe "without login_id" do
-    before { @user.login_id = ' ' }    
-    it { should_not be_valid }
-  end
-  
-  describe "without name" do
-    before { @user.name = ' ' }
-    it { should_not be_valid }
-  end
-  
-  describe "without email" do
-    before { @user.email = ' ' }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:login_id, ' ') }
+  it { should be_invalid_with_attribute_value(:name, ' ') }
+  it { should be_invalid_with_attribute_value(:email, ' ') }
+  it { should be_invalid_with_attribute_value(:password_confirmation, nil) }
+  it { should be_invalid_with_attribute_value(:login_id, 'w'*51) }
+  it { should be_invalid_with_attribute_value(:name, 'z'*51) }
   
   describe "without password" do
     before { @user.password = @user.password_confirmation = ' ' }
-    it { should_not be_valid }
-  end
-  
-  describe "without password confirmation" do
-    before { @user.password_confirmation = nil }
     it { should_not be_valid }
   end
   
@@ -127,8 +118,7 @@ describe User do
     logins = %w[x.y.yz0y Z@y987 #987 ab%%c $bfdm]
     
     logins.each do |login|
-      before { @user.login_id = login }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:login_id, login) }
     end   
   end
 
@@ -145,8 +135,7 @@ describe User do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo. 
         foo@bar_baz.com foo@bar+baz.com]
     addresses.each do |address|
-      before { @user.email = address }
-      it { should_not be_valid }
+      it { should be_invalid_with_attribute_value(:email, address) }
     end      
   end
 
@@ -188,11 +177,6 @@ describe User do
     end    
   end
   
-  describe "with a very long name" do
-    before { @user.name = 'z'*51 }
-    it { should_not be_valid }
-  end
-  
   describe "with a very short password" do
     before { @user.password = @user.password_confirmation = 'y'*5 }    
     it { should_not be_valid }
@@ -231,6 +215,21 @@ describe User do
       updates.should_not be_empty
       updates.each do |update|
         Community::Update.find_by_id(update.id).should be_nil
+      end
+    end
+  end
+
+  describe "log associations" do
+    before do
+      @user.save
+      FactoryGirl.create(:log, user: @user) 
+    end
+    it "should destroy log associations for the user" do
+      logs = @user.logs.dup
+      @user.destroy
+      logs.should_not be_empty
+      logs.each do |log|
+        Corner::Log.find_by_id(log.id).should be_nil
       end
     end
   end

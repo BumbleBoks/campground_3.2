@@ -1,0 +1,31 @@
+<% provide(:title, "Campground - #{current_user.name}'s Diary") %>
+<h2>New Log</h2>
+
+<div class='project_form'>
+	<%= form_for @log do |f| -%>
+		<%= render 'shared/error_messages', object: @log %>
+
+		<div id="date_picker"></div>
+		<div>
+			<%= f.label :log_date, "Date" %>
+			<%= f.text_field :log_date %>
+		</div>	
+
+		<div>
+			<%= f.label :title, "Title" %>
+			<%= f.text_field :title %>
+		</div>	
+		
+		<div>
+			<%= f.label :content, "Content" %>
+			<%= f.text_area :content, rows: 10 %>
+		</div>	
+	
+		<div>
+			<%= f.submit "Create a new log" %>			
+		</div>
+	
+	  
+	<% end -%>
+	
+</div>

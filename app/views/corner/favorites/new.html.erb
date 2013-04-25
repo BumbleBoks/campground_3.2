@@ -5,6 +5,7 @@
 	<%= submit_tag "Save favorites", id: "other_links_button" %>
 
 <div id="favorite_activities">
+	<%= hidden_field_tag "user[activity_ids][]" %>
 	<% Common::Activity.all.each do |activity| %>
 		<%= check_box_tag "user[activity_ids][]", activity.id, 
 			current_user.activity_ids.include?(activity.id), id: dom_id(activity) %>

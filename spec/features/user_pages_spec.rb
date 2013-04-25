@@ -1,25 +1,114 @@
 require 'spec_helper'
 
 describe "UserPages" do
+  after(:all) { clear_all_databases } 
   
   subject { page }
   
-  describe "join page" do
-    before { visit join_path }
+  describe "invite_user page" do
+    before { visit invite_user_path }
+    let (:submit) { "Send me an invite"}
+
+    it { should have_page_title('Join Campground') }
+    it { should have_selector('h2', text: 'Get An Invite') }
+    it { should_not have_selector('button', text: 'Join') }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Log out') }
+    it { should_not have_link('Join', href: invite_user_path) }
+    it { should have_link('Log in', href: login_path) }
+    
+    describe "with insufficient information" do
+      it "should not generate a new user request" do
+        expect { click_button submit }.not_to change(Site::UserRequest, :count)        
+      end
+      
+      describe "after submitting empty form" do
+        before { click_button submit }
+        
+        it { should have_page_title('Join Campground') }
+        it { should have_content("Email not sent. Try again.") }
+      end
+    end
+
+    describe "with invalid information" do
+      before { fill_in "Email", with: "foo" }
+      it "should not generate a new user request" do
+        expect { click_button submit }.not_to change(Site::UserRequest, :count)        
+      end
+      
+      describe "after submitting empty form" do
+        before { click_button submit }
+        
+        it { should have_page_title('Join Campground') }
+        it { should have_content("Email not sent. Try again.") }
+      end
+    end
+    
+    describe "with existing user information" do
+      before do
+        @user = FactoryGirl.create(:user)
+        visit invite_user_path
+        fill_in "Email", with: @user.email
+      end
+
+      it "should not generate a new user request" do
+        expect { click_button submit }.not_to change(Site::UserRequest, :count)        
+      end
+      
+      describe "after submitting empty form" do
+        before { click_button submit }
+        
+        it { should have_page_title('Campground Log In') }
+        it { should have_content("Account with that email already exists") }
+      end
+    end
+
+    describe "with valid information" do
+      before { fill_in "Email", with: "examplefoo@example.com" }
+      
+      it "should generate a new user request" do
+        expect { click_button submit }.to change(Site::UserRequest, :count).by(1)
+      end
+
+      describe "should send an invite to the user" do
+        before { click_button submit }
+        let(:invite_email) { ActionMailer::Base.deliveries.last }
+        
+        it "check email" do          
+          html_email_message = "<p>You're invited to join campground.<\/p>"
+          text_email_message = "Join campground by visiting"
+
+          expect(invite_email.to).to eq(["examplefoo@example.com"])
+          expect(invite_email.subject).to eq("Campground Invitation")
+          expect(invite_email.encoded).to include(html_email_message)
+          expect(invite_email.encoded).to include(text_email_message)     
+        end        
+      end
+      
+      describe "and take the user back to home page" do
+        before { click_button submit }
+        
+        it { should have_link("Join", invite_user_path) }
+        it { should have_link("Log in", login_path) }
+      end                  
+    end #valid information        
+  end # user invite page 
+    
+  describe "joining process" do
+    let (:submit) { "Create account" }
+    before do
+      user_request = Site::UserRequest.generate_new("examplefoo@example.com", "newuser")
+      user_request.save
+      visit edit_site_user_request_url(user_request.token)
+    end
     
     it { should have_page_title('Join Campground') }
     it { should have_selector('h2', text: 'Join campground') }
     it { should_not have_selector('button', text: 'Join') }
     it { should_not have_link('Profile') }
     it { should_not have_link('Log out') }
-    it { should_not have_link('Join', href: join_path) }
+    it { should_not have_link('Join') }
     it { should have_link('Log in', href: login_path) }
-  end
-  
-  describe "joining process" do
-    before { visit join_path }    
-    
-    let (:submit) { "Create account" }
     
     describe "with not enough information" do
       it "should not create a user" do 
@@ -34,8 +123,6 @@ describe "UserPages" do
         it { should have_content('Login can\'t be blank') }
         it { should have_content('Login is invalid') }
         it { should have_content('Name can\'t be blank') }
-        it { should have_content('Email can\'t be blank') }
-        it { should have_content('Email is invalid') }
         it { should have_content('Password can\'t be blank') }
         it { should have_content('Password is invalid') }
         it { should have_content('Password confirmation can\'t be blank') }
@@ -47,13 +134,28 @@ describe "UserPages" do
       before do
         fill_in "Login ID", with: "examplefoo"
         fill_in "Name", with: "Example Foo"
-        fill_in "Email", with: "examplefoo@example.com"
         fill_in "Password", with: "1foobar"
         fill_in "Confirm password", with: "1foobar"
       end
 
       it "should create a new user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+      
+      describe "should send an email to the new user" do
+        before { click_button submit }
+        let(:welcome_email) { ActionMailer::Base.deliveries.last }
+        
+        it "check email" do          
+          html_email_message = "<p>Thank you for joining campground, Example Foo.<\/p>"
+          text_email_message = "Thank you for joining campground, Example Foo."
+
+          expect(welcome_email.to).to eq(["examplefoo@example.com"])
+          expect(welcome_email.subject).to eq("Welcome to Campground")
+          expect(welcome_email.encoded).to include(html_email_message)
+          expect(welcome_email.encoded).to include(text_email_message)     
+        end
+        
       end
       
       describe "and login to home page" do

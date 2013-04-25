@@ -18,10 +18,7 @@ describe Common::State do
   it { should respond_to(:trails) }
   it { should be_valid }
   
-  describe "without name" do
-    before { @state.name = '' }
-    it { should_not be_valid }
-  end
+  it { should be_invalid_with_attribute_value(:name, '') }
   
   describe "with a duplicate name" do
     before do

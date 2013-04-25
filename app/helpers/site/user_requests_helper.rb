@@ -1,0 +1,2 @@
+module Site::UserRequestsHelper
+end

@@ -74,6 +74,11 @@ li {
 	padding-bottom: 5px;
 }
 
+input[type="submit"] {
+	border: none;
+	box-shadow: 2px 2px 2px olive;
+}
+
 /* header */
 header {
 	background: darkseagreen;
@@ -165,11 +170,20 @@ footer {
 		padding-left: 10px;
 		padding-right: 10px;
 		
+		.flash_error {
+			@include flash_message_styling(pink, red);
+		}
+
+		.flash_success {
+			@include flash_message_styling(rgb(212, 235, 172), green);
+		}
+
 		#home_trail_updates {
 			margin-top: 30px;
 		}
-	}	
+	}		
 }
+
 
 .title_board {
 	height: 100px;
