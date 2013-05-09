@@ -2,7 +2,7 @@
 <h2>New Log</h2>
 
 <div class='project_form'>
-	<%= form_for @log do |f| -%>
+	<%= form_for @log, url: { action: :create } do |f| -%>
 		<%= render 'shared/error_messages', object: @log %>
 
 		<div id="date_picker"></div>

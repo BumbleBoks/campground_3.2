@@ -76,6 +76,11 @@ class User < ActiveRecord::Base
   end
   
   # instance methods
+  def set_favorite_attributes(new_attribute_ids, attributes, collection)    
+    user_attributes = new_attribute_ids.map { |id| collection.find_by_id(id) }    
+    self.update_attribute(attributes, user_attributes)     
+  end
+  
   def update_partial_attributes(user_params)  
     unless self.class.partial_params.include?(user_params.keys)
       self.errors.add("parmeters", "cannot be updated!")

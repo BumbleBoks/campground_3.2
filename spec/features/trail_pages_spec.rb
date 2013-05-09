@@ -12,7 +12,7 @@ describe "Trail pages" do
     describe "without logging in" do
       before { visit new_common_trail_path }
       it_should_behave_like "home page when not logged in"
-    end
+    end    
     
     describe "as a regular user" do
       before do

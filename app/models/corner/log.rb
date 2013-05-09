@@ -32,7 +32,7 @@ class Corner::Log < ActiveRecord::Base
   protected        
   def set_log_date
     if log_date.nil?
-      self.log_date = Time.zone.today
+      self.log_date = Date.current
     end    
   end        
 end
