@@ -1,1 +1,2 @@
 $('#trail_updates').html("<%= escape_javascript(render_update_partial(@trail.updates, false)) %>")
+$('.project_form').html("<%= escape_javascript(render 'common/trails/update_form') %>")

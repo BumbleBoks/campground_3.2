@@ -1,12 +1,9 @@
 <% provide(:title, "Campground - #{current_user.name}'s Diary") %>
+<h2>My Logs</h2>
 
-<p>
-	<%= @log.log_date.to_formatted_s(:calendar_date) %>
-</p>
-<p>
-  <b><%= @log.title %></b>
-</p>
+<div id="corner_log_log_date" class="hidden"></div>
+<div id="date_picker"></div>
 
-<p>
-  <%= @log.content %>
-</p>
+<div id="selected_log">
+	<%= render 'log', { log: @log } unless @log.nil? %>
+</div>

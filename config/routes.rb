@@ -26,8 +26,12 @@ Campground::Application.routes.draw do
     post 'favorites/add_trail'
     post 'favorites/remove_trail'
     
-    resources :logs, only: [:show, :new, :create]
+    match "/logs/:year/:month/:day" => 'logs#show', as: 'logs', constraints: {
+      year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/ 
+    }  
+    resources :logs, only: [:new, :create]
   end
+  # match "/corner/logs/:year/:month/:date", to: 'corner/logs#show'
   
   get 'invite_user', to: 'users#invite_user', as: 'invite_user'
   namespace :site do

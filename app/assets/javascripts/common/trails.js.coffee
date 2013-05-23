@@ -32,14 +32,13 @@ jQuery ->
   $('#activity_id').change ->
     set_trail_html(trails)
 
-  $('#get_updates_button').click ->
+  $('#get_updates_button').click (event) ->
+    event.preventDefault()
     trail_id = $('#trail_id :selected').val()
-#    orighref = $('#get_updates_button').attr("href")
     orighref = $('#hidden_request_path').html()
-    newhref = orighref + '?trail_id=' + trail_id
-    $('#get_updates_button').attr("href", newhref)
-#    $.ajax
-#      url: newhref
-#      type: 'GET'
-#      dataType: "script"    
+    $.ajax
+      url: orighref
+      type: 'GET'
+      dataType: "script"
+      data: trail_id: trail_id    
     
