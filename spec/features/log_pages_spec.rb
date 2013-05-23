@@ -5,6 +5,31 @@ describe "Log pages" do
   let (:user) { FactoryGirl.create(:user) }  
   subject { page }
   
+  describe "show an existing log" do
+    let (:log) { FactoryGirl.create(:log, user: user) }
+
+    describe "without logging in" do
+      before do
+        log_date = log.log_date
+        visit corner_logs_path(log_date.year, log_date.month, log_date.day)
+      end 
+      it_should_behave_like "home page when not logged in"
+    end
+    
+    describe "as the user with log" do
+      before do
+        log_in user
+        log_date = log.log_date
+        visit corner_logs_path(log_date.year, log_date.month, log_date.day)
+      end
+      it { should have_page_title("Campground - #{user.name}'s Diary") }
+      it { should have_selector('h2', text: "My Logs") } 
+      it { should have_content(log.log_date.to_formatted_s(:calendar_date)) }
+      it { should have_content(log.title) }
+      it { should have_content(log.content) }
+    end
+  end
+  
   describe "creating a new log" do
     let (:submit) { "Create a new log" }
     

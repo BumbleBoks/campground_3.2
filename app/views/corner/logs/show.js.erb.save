@@ -1,0 +1,1 @@
+$('#selected_log').html("<%= escape_javascript(render 'log', { log: @log }) %>")
